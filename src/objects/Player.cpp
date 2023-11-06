@@ -10,8 +10,8 @@ void InitPlayer(Player& player)
 	player.posX = player.initPosX;
 	player.posY = player.initPosY;
 
-	player.speed = 10.0f;
+	player.speed = 200.0f;
 
-	player.width = 20;
-	player.height = 20;
+	player.width = 40;
+	player.height = 40;
 }

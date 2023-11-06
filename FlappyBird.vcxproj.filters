@@ -24,12 +24,18 @@
     <ClCompile Include="src\objects\Obstacle.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\gameData\GmaeLoop.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\objects\Player.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="src\objects\Obstacle.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gameData\GmaeLoop.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
