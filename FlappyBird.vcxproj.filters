@@ -13,30 +13,36 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{66f547ab-3e38-451e-a943-1faa865628d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLoop">
+      <UniqueIdentifier>{f1cd6964-9325-42f3-adf4-5a24ed3636b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\objects\Player.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="src\objects\Obstacle.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\objects\Player.cpp">
+      <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="src\gameData\GmaeLoop.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>GameLoop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\objects\Player.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="src\objects\Obstacle.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\Player.h">
+      <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="src\gameData\GmaeLoop.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>GameLoop</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

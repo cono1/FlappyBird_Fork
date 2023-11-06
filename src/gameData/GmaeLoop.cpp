@@ -7,6 +7,8 @@ using namespace std;
 
 void InitAll(Player& player, Obstacle& obstacle)
 {
+	srand(static_cast<unsigned int>(time(NULL)));
+
 	const int screenWidth = 1080;
 	const int screenHeight = 720;
 
@@ -18,11 +20,12 @@ void InitAll(Player& player, Obstacle& obstacle)
 
 void DrawAll(Player player, Obstacle obstacle)
 {
-	DrawRectangle(player.posX, player.posY, player.width, player.height, RED);
+	DrawRectangle(static_cast<int>(player.posX), static_cast<int>(player.posY), player.width, player.height, RED);
 
-	DrawRectangle(obstacle.posX, obstacle.posY, obstacle.width, obstacle.height, ORANGE);
+	DrawRectangle(static_cast<int>(obstacle.posX), static_cast<int>(obstacle.posY), obstacle.width, obstacle.height, ORANGE);
 }
 
+// mov del jugador
 void PlayerMovement(Player& player)
 {
 	if (IsKeyDown(KEY_W))
@@ -33,6 +36,18 @@ void PlayerMovement(Player& player)
 	else if (IsKeyDown(KEY_S))
 	{
 		player.posY += player.speed * GetFrameTime();
+	}
+}
+
+void ObstacleMovement(Obstacle& obstacle)
+{
+	obstacle.posX -= obstacle.speed * GetFrameTime();
+
+	if (obstacle.posX <= 0)
+	{
+		obstacle.posX = obstacle.initPosX;
+
+		obstacle.posY = static_cast<float>(rand() % GetScreenHeight());
 	}
 }
 
@@ -49,6 +64,8 @@ void GameLoop()
 		SetExitKey(NULL);
 
 		PlayerMovement(player);
+
+		ObstacleMovement(obstacle);
 
 		BeginDrawing();
 
