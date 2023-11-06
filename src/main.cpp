@@ -1,4 +1,5 @@
 #include "objects/Player.h"
+#include "objects/Obstacle.h"
 
 #include "raylib.h"
 
@@ -9,9 +10,12 @@ int main()
 
 	Player player;
 
+	Obstacle obstacle;
+
 	InitWindow(screenWidth, screenHeight, "Flappy Bird");
 
 	InitPlayer(player);
+	InitObstacle(obstacle);
 
 	while(!WindowShouldClose())
 	{
@@ -20,6 +24,8 @@ int main()
 		BeginDrawing();
 
 		DrawRectangle(player.posX, player.posY, player.width, player.height, RED);
+
+		DrawRectangle(obstacle.posX, obstacle.posY, obstacle.width, obstacle.height, ORANGE);
 
 		ClearBackground(DARKGREEN);
 		
