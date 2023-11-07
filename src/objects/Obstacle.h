@@ -14,4 +14,8 @@ struct Obstacle
 	float speed;
 };
 
+// inicializa los obstáculos
 void InitObstacle(Obstacle& obstacle);
+
+// resetea la posicion del obstáculo
+void ResetObstaclePosition(Obstacle& obstacle);

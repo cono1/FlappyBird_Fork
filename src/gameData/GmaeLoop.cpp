@@ -12,7 +12,7 @@ void InitAll(Player& player, Obstacle& obstacle)
 	const int screenWidth = 1080;
 	const int screenHeight = 720;
 
-	InitWindow(screenWidth, screenHeight, "Flappy Bird");
+	InitWindow(screenWidth, screenHeight, "Flappy Bird 0.1");
 
 	InitPlayer(player);
 	InitObstacle(obstacle);
@@ -51,6 +51,18 @@ void ObstacleMovement(Obstacle& obstacle)
 	}
 }
 
+void PlayerObstacleCollision(Player& player, Obstacle& obstacle)
+{
+	if ((player.posX + player.width >= obstacle.posX) &&
+		(player.posX <= obstacle.posX + obstacle.width) &&
+		(player.posY + player.height >= obstacle.posY) &&
+		(player.posY <= obstacle.posY + obstacle.height))
+	{
+		ResetObstaclePosition(obstacle);
+		ResetPlayerPosition(player);
+	}
+}
+
 void GameLoop()
 {
 	Player player;
@@ -66,6 +78,8 @@ void GameLoop()
 		PlayerMovement(player);
 
 		ObstacleMovement(obstacle);
+
+		PlayerObstacleCollision(player, obstacle);
 
 		BeginDrawing();
 

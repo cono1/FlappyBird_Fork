@@ -14,4 +14,8 @@ struct Player
 	int height;
 };
 
+// inicializa el jugador
 void InitPlayer(Player& player);
+
+// resetea la posición del jugador
+void ResetPlayerPosition(Player& player);
