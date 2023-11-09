@@ -39,7 +39,8 @@ void PlayerMovement(Player& player)
 	}
 }
 
-void ObstacleMovement(Obstacle& obstacle)
+// mov del obstáculo
+void ObstacleMovement(Obstacle& obstacle, Player player)
 {
 	obstacle.posX -= obstacle.speed * GetFrameTime();
 
@@ -47,10 +48,11 @@ void ObstacleMovement(Obstacle& obstacle)
 	{
 		obstacle.posX = obstacle.initPosX;
 
-		obstacle.posY = static_cast<float>(rand() % GetScreenHeight());
+		obstacle.height = rand() % GetScreenHeight() + player.height;
 	}
 }
 
+// colision del juagador con el obstáculo
 void PlayerObstacleCollision(Player& player, Obstacle& obstacle)
 {
 	if ((player.posX + player.width >= obstacle.posX) &&
@@ -77,7 +79,7 @@ void GameLoop()
 
 		PlayerMovement(player);
 
-		ObstacleMovement(obstacle);
+		ObstacleMovement(obstacle, player);
 
 		PlayerObstacleCollision(player, obstacle);
 
