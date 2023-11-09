@@ -83,6 +83,8 @@ void GameLoop()
 
 		BeginDrawing();
 
+		DrawText("0.1", GetScreenWidth() - 50, GetScreenHeight() - 40, 40, WHITE);
+		
 		DrawAll(player,obstacle);
 
 		ClearBackground(DARKGREEN);
