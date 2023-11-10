@@ -95,6 +95,9 @@
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y/i/s "$(ProjectDir)res" "$(OutDir)/res"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -116,6 +119,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)libs\raylib\lib;%(AdditionalIncludeDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y/i/s "$(ProjectDir)res" "$(OutDir)/res"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
