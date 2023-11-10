@@ -15,7 +15,7 @@ struct Obstacle
 };
 
 // inicializa los obstáculos
-void InitObstacle(Obstacle& obstacle);
+void InitObstacle(Obstacle& obstacle, float posY, int height);
 
 // resetea la posicion del obstáculo
-void ResetObstaclePosition(Obstacle& obstacle);
+void ResetObstaclePosition(Obstacle& obstacle, float posY, int height);
