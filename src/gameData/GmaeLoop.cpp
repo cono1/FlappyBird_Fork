@@ -16,7 +16,7 @@ void InitAll(Player& player, Obstacle& obstacle1, Obstacle& obstacle2)
 
 	InitPlayer(player);
 	InitObstacle(obstacle1, 0.0f, 300);
-	InitObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2), GetScreenHeight());
+	InitObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());
 }
 
 // carga las texturas
@@ -43,7 +43,7 @@ void PlayerMovement(Player& player)
 		player.posY -= player.speed * GetFrameTime();
 	}
 
-	else if (IsKeyDown(KEY_S))
+	else
 	{
 		player.posY += player.speed * GetFrameTime();
 	}
@@ -103,7 +103,7 @@ void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2)
 	{
 		ResetPlayerPosition(player);
 		ResetObstaclePosition(obstacle1, 0.0f, 300);
-		ResetObstaclePosition(obstacle2, static_cast<float>(GetScreenHeight() / 2), GetScreenHeight());
+		ResetObstaclePosition(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());
 	}
 }
 
@@ -148,7 +148,7 @@ void GameLoop()
 		DrawTextureEx(foreground, Vector2{ scrollingFore, 350 }, 0.0f, 2.0f, WHITE);
 		DrawTextureEx(foreground, Vector2{ foreground.width * 2 + scrollingFore, 350 }, 0.0f, 2.0f, WHITE);
 
-		DrawText("0.1", GetScreenWidth() - 50, GetScreenHeight() - 40, 40, WHITE);
+		DrawText("0.2", GetScreenWidth() - 50, GetScreenHeight() - 40, 40, WHITE);
 
 		DrawObjects(player, obstacle1, obstacle2);
 
