@@ -18,6 +18,13 @@ void InitAll(Player& player, Obstacle& obstacle)
 	InitObstacle(obstacle);
 }
 
+// carga las texturas
+void InitTextures(Texture2D& foreground, Texture2D& midground)
+{
+	foreground = LoadTexture("res/assets/background/cyberpunk_street_foreground.png");
+	midground = LoadTexture("res/assets/background/cyberpunk_street_midground.png");
+}
+
 void DrawAll(Player player, Obstacle obstacle)
 {
 	DrawRectangle(static_cast<int>(player.posX), static_cast<int>(player.posY), player.width, player.height, RED);
@@ -71,11 +78,25 @@ void GameLoop()
 
 	Obstacle obstacle;
 
+	Texture2D foreground;
+	Texture2D midground;
+
 	InitAll(player, obstacle);
+
+	InitTextures(foreground, midground);
+
+	float scrollingFore = 0.0f;
+	float scrollingMid = 0.0f;
 
 	while (!WindowShouldClose())
 	{
 		SetExitKey(NULL);
+
+		scrollingFore -= 100.0f * GetFrameTime();
+		scrollingMid -= 50.0f * GetFrameTime();
+
+		if (scrollingFore <= -foreground.width * 2) scrollingFore = 0;
+		if (scrollingMid <= -midground.width * 2) scrollingMid = 0;
 
 		PlayerMovement(player);
 
@@ -85,6 +106,12 @@ void GameLoop()
 
 		BeginDrawing();
 
+		DrawTextureEx(midground, Vector2 { scrollingMid, 300 }, 0.0f, 2.0f, WHITE);
+		DrawTextureEx(midground, Vector2 { midground.width * 2 + scrollingMid, 300 }, 0.0f, 2.0f, WHITE);
+
+		DrawTextureEx(foreground, Vector2 { scrollingFore, 350 }, 0.0f, 2.0f, WHITE);
+		DrawTextureEx(foreground, Vector2 { foreground.width * 2 + scrollingFore, 350 }, 0.0f, 2.0f, WHITE);
+
 		DrawText("0.1", GetScreenWidth() - 50, GetScreenHeight() - 40, 40, WHITE);
 		
 		DrawAll(player,obstacle);
@@ -93,6 +120,8 @@ void GameLoop()
 
 		EndDrawing();
 	}
+
+	UnloadTexture(foreground);
 
 	CloseWindow();
 
