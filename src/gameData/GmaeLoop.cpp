@@ -1,5 +1,7 @@
 #include "GmaeLoop.h"
 
+#include "scenes/Menu.h"
+
 #include "raylib.h"
 #include <iostream>
 
@@ -49,6 +51,7 @@ void PlayerMovement(Player& player)
 	}
 }
 
+// el jugador no desaparece por arriba y avisa si se va para abajo
 void PlayerScreenLimits(Player& player)
 {
 	if (player.posY <= 0)
@@ -81,7 +84,7 @@ void ObstacleMovement(Obstacle& obstacle1, Obstacle& obstacle2, Player player)
 		obstacle2.posX = obstacle2.initPosX;
 
 		obstacle2.posY = static_cast<float>(rand() % GetScreenHeight() + (obstacle1.height + player.height + player.height / 2));
-	
+
 		if (obstacle2.posY >= GetScreenHeight())
 		{
 			obstacle2.posY = static_cast<float>(GetScreenHeight() - 10);
@@ -105,11 +108,11 @@ bool PlayerObstacleCollision(Player& player, Obstacle& obstacle)
 
 void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2)
 {
-	if (PlayerObstacleCollision(player,obstacle1) || player.fall)
+	if (PlayerObstacleCollision(player, obstacle1) || player.fall)
 	{
 		ResetPlayer(player);
 		ResetObstacle(obstacle1, 0.0f, 300);
-		ResetObstacle(obstacle2,static_cast<float>(GetScreenHeight() / 2), GetScreenHeight());
+		ResetObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2), GetScreenHeight());
 	}
 
 	if (PlayerObstacleCollision(player, obstacle2) || player.fall)
@@ -122,6 +125,8 @@ void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2)
 
 void GameLoop()
 {
+	Screen screen = Screen::MENU;
+
 	Player player;
 
 	Obstacle obstacle1;
@@ -134,6 +139,8 @@ void GameLoop()
 
 	InitTextures(foreground, midground);
 
+
+
 	float scrollingFore = 0.0f;
 	float scrollingMid = 0.0f;
 
@@ -141,31 +148,53 @@ void GameLoop()
 	{
 		SetExitKey(NULL);
 
-		scrollingFore -= 100.0f * GetFrameTime();
-		scrollingMid -= 50.0f * GetFrameTime();
-
-		if (scrollingFore <= -foreground.width * 2) scrollingFore = 0;
-		if (scrollingMid <= -midground.width * 2) scrollingMid = 0;
-
-		PlayerMovement(player);
-
-		PlayerScreenLimits(player);
-
-		ObstacleMovement(obstacle1, obstacle2, player);
-
-		ResetGame(player, obstacle1, obstacle2);
+		switch (screen)
+		{
+		case Screen::MENU:
+			DrawMenu(screen);
+			break;
+		case Screen::GAME:
+			break;
+		case Screen::CREDITS:
+			break;
+		}
 
 		BeginDrawing();
 
-		DrawTextureEx(midground, Vector2{ scrollingMid, 300 }, 0.0f, 2.0f, WHITE);
-		DrawTextureEx(midground, Vector2{ midground.width * 2 + scrollingMid, 300 }, 0.0f, 2.0f, WHITE);
+		switch (screen)
+		{
+		case Screen::MENU:
+			break;
+		case Screen::GAME:
+			scrollingFore -= 100.0f * GetFrameTime();
+			scrollingMid -= 50.0f * GetFrameTime();
 
-		DrawTextureEx(foreground, Vector2{ scrollingFore, 350 }, 0.0f, 2.0f, WHITE);
-		DrawTextureEx(foreground, Vector2{ foreground.width * 2 + scrollingFore, 350 }, 0.0f, 2.0f, WHITE);
+			if (scrollingFore <= -foreground.width * 2) scrollingFore = 0;
+			if (scrollingMid <= -midground.width * 2) scrollingMid = 0;
 
-		DrawText("0.2", GetScreenWidth() - 50, GetScreenHeight() - 40, 40, WHITE);
+			PlayerMovement(player);
 
-		DrawObjects(player, obstacle1, obstacle2);
+			PlayerScreenLimits(player);
+
+			ObstacleMovement(obstacle1, obstacle2, player);
+
+			ResetGame(player, obstacle1, obstacle2);
+
+
+
+			DrawTextureEx(midground, Vector2{ scrollingMid, 300 }, 0.0f, 2.0f, WHITE);
+			DrawTextureEx(midground, Vector2{ midground.width * 2 + scrollingMid, 300 }, 0.0f, 2.0f, WHITE);
+
+			DrawTextureEx(foreground, Vector2{ scrollingFore, 350 }, 0.0f, 2.0f, WHITE);
+			DrawTextureEx(foreground, Vector2{ foreground.width * 2 + scrollingFore, 350 }, 0.0f, 2.0f, WHITE);
+
+			DrawText("0.2", GetScreenWidth() - 50, GetScreenHeight() - 40, 40, WHITE);
+
+			DrawObjects(player, obstacle1, obstacle2);
+			break;
+		case Screen::CREDITS:
+			break;
+		}
 
 		ClearBackground(DARKGREEN);
 

@@ -19,6 +19,9 @@
     <Filter Include="GameLoop">
       <UniqueIdentifier>{f1cd6964-9325-42f3-adf4-5a24ed3636b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{16716679-e829-480b-9584-d1ee48466dea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -33,6 +36,15 @@
     <ClCompile Include="src\gameData\GmaeLoop.cpp">
       <Filter>GameLoop</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenes\Credits.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\Game.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\Menu.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\objects\Obstacle.h">
@@ -43,6 +55,15 @@
     </ClInclude>
     <ClInclude Include="src\gameData\GmaeLoop.h">
       <Filter>GameLoop</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\Credits.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\Game.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\Menu.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
