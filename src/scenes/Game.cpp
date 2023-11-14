@@ -84,14 +84,13 @@ bool PlayerObstacleCollision(Player& player, Obstacle& obstacle)
 	return false;
 }
 
-
 void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2)
 {
 	if (PlayerObstacleCollision(player, obstacle1) || player.fall)
 	{
 		ResetPlayer(player);
 		ResetObstacle(obstacle1, 0.0f, 300);
-		ResetObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2), GetScreenHeight());
+		ResetObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());
 	}
 
 	if (PlayerObstacleCollision(player, obstacle2) || player.fall)
