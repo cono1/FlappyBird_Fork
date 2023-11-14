@@ -1,10 +1,8 @@
 #include "Game.h"
 
-
 #include <iostream>
 
 using namespace std;
-
 
 void DrawObjects(Player player, Obstacle obstacle1, Obstacle obstacle2)
 {

@@ -2,6 +2,7 @@
 
 #include "scenes/Menu.h"
 #include "scenes/Game.h"
+#include "scenes/Credits.h"
 
 #include "raylib.h"
 #include <iostream>
@@ -41,11 +42,13 @@ void GameLoop()
 	Texture2D foreground;
 	Texture2D midground;
 
-	InitAll(player, obstacle1, obstacle2);
-	InitTextures(foreground, midground);
-
 	float scrollingFore = 0.0f;
 	float scrollingMid = 0.0f;
+
+	bool returnToMenu = false;
+
+	InitAll(player, obstacle1, obstacle2);
+	InitTextures(foreground, midground);	
 
 	while (!WindowShouldClose())
 	{
@@ -71,8 +74,11 @@ void GameLoop()
 			break;
 		case Screen::GAME:
 			DrawObjects(player, obstacle1, obstacle2);
+			DrawReturnButton(screen, returnToMenu);
 			break;
 		case Screen::CREDITS:
+			DrawCredits();
+			DrawReturnButton(screen, returnToMenu);
 			break;
 		}
 
