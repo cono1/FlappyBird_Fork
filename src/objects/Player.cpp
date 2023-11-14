@@ -14,13 +14,17 @@ void InitPlayer(Player& player)
 
 	player.width = 40;
 	player.height = 40;
+
+	player.fall = false;
 }
 
-void ResetPlayerPosition(Player& player)
+void ResetPlayer(Player& player)
 {
 	player.initPosX = 50;
 	player.initPosY = static_cast<float>(GetScreenHeight() / 2);
 
 	player.posX = player.initPosX;
 	player.posY = player.initPosY;
+
+	player.fall = false;
 }

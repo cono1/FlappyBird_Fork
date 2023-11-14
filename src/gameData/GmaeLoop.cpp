@@ -49,6 +49,19 @@ void PlayerMovement(Player& player)
 	}
 }
 
+void PlayerScreenLimits(Player& player)
+{
+	if (player.posY <= 0)
+	{
+		player.posY = 0;
+	}
+
+	if (player.posY + player.height >= GetScreenHeight())
+	{
+		player.fall = true;
+	}
+}
+
 // mov del obstáculo
 void ObstacleMovement(Obstacle& obstacle1, Obstacle& obstacle2, Player player)
 {
@@ -92,18 +105,18 @@ bool PlayerObstacleCollision(Player& player, Obstacle& obstacle)
 
 void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2)
 {
-	if (PlayerObstacleCollision(player,obstacle1))
+	if (PlayerObstacleCollision(player,obstacle1) || player.fall)
 	{
-		ResetPlayerPosition(player);
-		ResetObstaclePosition(obstacle1, 0.0f, 300);
-		ResetObstaclePosition(obstacle2,static_cast<float>(GetScreenHeight() / 2), GetScreenHeight());
+		ResetPlayer(player);
+		ResetObstacle(obstacle1, 0.0f, 300);
+		ResetObstacle(obstacle2,static_cast<float>(GetScreenHeight() / 2), GetScreenHeight());
 	}
 
-	if (PlayerObstacleCollision(player, obstacle2))
+	if (PlayerObstacleCollision(player, obstacle2) || player.fall)
 	{
-		ResetPlayerPosition(player);
-		ResetObstaclePosition(obstacle1, 0.0f, 300);
-		ResetObstaclePosition(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());
+		ResetPlayer(player);
+		ResetObstacle(obstacle1, 0.0f, 300);
+		ResetObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());
 	}
 }
 
@@ -135,6 +148,8 @@ void GameLoop()
 		if (scrollingMid <= -midground.width * 2) scrollingMid = 0;
 
 		PlayerMovement(player);
+
+		PlayerScreenLimits(player);
 
 		ObstacleMovement(obstacle1, obstacle2, player);
 

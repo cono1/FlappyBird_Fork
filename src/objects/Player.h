@@ -12,10 +12,12 @@ struct Player
 
 	int width;
 	int height;
+
+	bool fall;
 };
 
 // inicializa el jugador
 void InitPlayer(Player& player);
 
 // resetea la posición del jugador
-void ResetPlayerPosition(Player& player);
+void ResetPlayer(Player& player);

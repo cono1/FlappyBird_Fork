@@ -16,7 +16,7 @@ void InitObstacle(Obstacle& obstacle, float posY, int height)
 	obstacle.speed = 250.0f;
 }
 
-void ResetObstaclePosition(Obstacle& obstacle, float posY, int height)
+void ResetObstacle(Obstacle& obstacle, float posY, int height)
 {
 	obstacle.initPosX = static_cast<float>(GetScreenWidth() - 40);
 	obstacle.initPosY = posY;

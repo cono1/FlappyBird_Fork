@@ -18,4 +18,4 @@ struct Obstacle
 void InitObstacle(Obstacle& obstacle, float posY, int height);
 
 // resetea la posicion del obstáculo
-void ResetObstaclePosition(Obstacle& obstacle, float posY, int height);
+void ResetObstacle(Obstacle& obstacle, float posY, int height);
