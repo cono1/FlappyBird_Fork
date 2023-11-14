@@ -33,4 +33,6 @@ void DrawMenu(Screen& screen)
 			screen = Screen::CREDITS;
 		}
 	}
+
+	DrawText("0.2", GetScreenWidth() - 50, GetScreenHeight() - 40, 40, WHITE);
 }
