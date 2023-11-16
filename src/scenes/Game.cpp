@@ -102,24 +102,24 @@ bool PlayerObstacleCollision(Player& player, Obstacle& obstacle)
 	return false;
 }
 
-void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2)
+void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu)
 {
-	if (PlayerObstacleCollision(player, obstacle1) || player.fall)
+	if (PlayerObstacleCollision(player, obstacle1) || player.fall || 
+		PlayerObstacleCollision(player, obstacle2) || returnToMenu)
 	{
 		ResetPlayer(player);
 		ResetObstacle(obstacle1, 0.0f, 300);
 		ResetObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());
-	}
 
-	if (PlayerObstacleCollision(player, obstacle2) || player.fall)
-	{
-		ResetPlayer(player);
-		ResetObstacle(obstacle1, 0.0f, 300);
-		ResetObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());
+		returnToMenu = false;
 	}
 }
 
-void Update(Player& player, Color& playerColor, Obstacle& obstacle1, Obstacle& obstacle2, Texture2D& foreground, Texture2D& midground, Texture2D& playerDown, Texture2D& playerUp, Texture2D& obstacleUp, Texture2D& obstacleDown, float& scrollingFore, float& scrollingBack)
+void Update(Player& player, Color& playerColor, Obstacle& obstacle1, Obstacle& obstacle2,
+	Texture2D& foreground, Texture2D& midground, 
+	Texture2D& playerDown, Texture2D& playerUp, 
+	Texture2D& obstacleUp, Texture2D& obstacleDown, 
+	float& scrollingFore, float& scrollingBack, bool returnToMenu)
 {
 	scrollingFore -= 100.0f * GetFrameTime();
 	scrollingBack -= 50.0f * GetFrameTime();
@@ -135,6 +135,6 @@ void Update(Player& player, Color& playerColor, Obstacle& obstacle1, Obstacle& o
 
 	ObstacleMovement(obstacle1, obstacle2, player);
 
-	ResetGame(player, obstacle1, obstacle2);
+	ResetGame(player, obstacle1, obstacle2, returnToMenu);
 
 }

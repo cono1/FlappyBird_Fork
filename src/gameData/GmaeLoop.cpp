@@ -74,7 +74,8 @@ void GameLoop()
 			DrawMenu(screen);
 			break;
 		case Screen::GAME:
-			Update(player, playerColor, obstacle1, obstacle2, foreground, background, playerDown, playerUp, obstacleUp, obstacleDown, scrollingFore, scrollingBack);
+			ResetGame(player, obstacle1, obstacle2, returnToMenu);
+			Update(player, playerColor, obstacle1, obstacle2, foreground, background, playerDown, playerUp, obstacleUp, obstacleDown, scrollingFore, scrollingBack, returnToMenu);
 			break;
 		case Screen::CREDITS:
 			break;
