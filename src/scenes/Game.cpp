@@ -55,7 +55,7 @@ void PlayerScreenLimits(Player& player)
 		player.posY = 0;
 	}
 
-	if (player.posY + player.height >= GetScreenHeight())
+	if (player.posY >= GetScreenHeight())
 	{
 		player.fall = true;
 	}
@@ -68,14 +68,14 @@ void ObstacleMovement(Obstacle& obstacle1, Obstacle& obstacle2, Player player)
 
 	obstacle2.posX -= obstacle2.speed * GetFrameTime();
 
-	if (obstacle1.posX <= 0)
+	if (obstacle1.posX + obstacle1.width <= 0)
 	{
 		obstacle1.posX = obstacle1.initPosX;
 
 		obstacle1.height = rand() % GetScreenHeight() - (player.height + player.height / 2);
 	}
 
-	if (obstacle2.posX <= 0)
+	if (obstacle2.posX + obstacle2.width <= 0)
 	{
 		obstacle2.posX = obstacle2.initPosX;
 
