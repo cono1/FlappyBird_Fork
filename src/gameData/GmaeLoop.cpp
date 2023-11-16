@@ -24,10 +24,17 @@ void InitAll(Player& player, Obstacle& obstacle1, Obstacle& obstacle2)
 }
 
 // carga las texturas
-void InitTextures(Texture2D& foreground, Texture2D& midground)
+void InitTextures(Texture2D& foreground, Texture2D& background,
+	Texture2D& playerDown, Texture2D& playerUp, Texture2D& obstacleUp, Texture2D& obstacleDown)
 {
-	foreground = LoadTexture("res/assets/background/cyberpunk_street_foreground.png");
-	midground = LoadTexture("res/assets/background/cyberpunk_street_midground.png");
+	foreground = LoadTexture("res/assets/background/forestBack.png");
+	background = LoadTexture("res/assets/background/forestFore.png");
+
+	playerDown = LoadTexture("res/assets/player/pumpkinDown.png");
+	playerUp = LoadTexture("res/assets/player/pumpkinUp.png");
+
+	obstacleUp = LoadTexture("res/assets/obstacles/wood.png");
+	obstacleDown = LoadTexture("res/assets/obstacles/wood.png");
 }
 
 void GameLoop()
@@ -35,20 +42,27 @@ void GameLoop()
 	Screen screen = Screen::MENU;
 
 	Player player;
+	Color playerColor = RED;
 
 	Obstacle obstacle1;
 	Obstacle obstacle2;
 
 	Texture2D foreground;
-	Texture2D midground;
+	Texture2D background;
+
+	Texture2D playerUp;
+	Texture2D playerDown;
+
+	Texture2D obstacleUp;
+	Texture2D obstacleDown;
 
 	float scrollingFore = 0.0f;
-	float scrollingMid = 0.0f;
+	float scrollingBack = 0.0f;
 
 	bool returnToMenu = false;
 
 	InitAll(player, obstacle1, obstacle2);
-	InitTextures(foreground, midground);	
+	InitTextures(foreground, background, playerDown, playerUp, obstacleUp,obstacleDown);
 
 	while (!WindowShouldClose())
 	{
@@ -60,7 +74,7 @@ void GameLoop()
 			DrawMenu(screen);
 			break;
 		case Screen::GAME:
-			Update(player,obstacle1,obstacle2,foreground,midground,scrollingFore,scrollingMid);
+			Update(player, playerColor, obstacle1, obstacle2, foreground, background, playerDown, playerUp, obstacleUp, obstacleDown, scrollingFore, scrollingBack);
 			break;
 		case Screen::CREDITS:
 			break;
@@ -73,7 +87,7 @@ void GameLoop()
 		case Screen::MENU:
 			break;
 		case Screen::GAME:
-			DrawObjects(player, obstacle1, obstacle2);
+			//DrawObjects(player, playerColor, obstacle1, obstacle2);
 			DrawReturnButton(screen, returnToMenu);
 			break;
 		case Screen::CREDITS:

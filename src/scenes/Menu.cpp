@@ -41,8 +41,8 @@ void DrawReturnButton(Screen& screen, bool& returnToMenu)
 
 	DrawText("Return", returnPosX, returnPosY, 40, BLACK);
 
-	if (GetMousePosition().x >= returnPosX && GetMousePosition().x <= returnPosX + 100
-		&& GetMousePosition().y >= returnPosY && GetMousePosition().y <= returnPosY + 20)
+	if (GetMousePosition().x >= returnPosX && GetMousePosition().x <= returnPosX + 140
+		&& GetMousePosition().y >= returnPosY && GetMousePosition().y <= returnPosY + 40)
 	{
 		DrawText("Return", returnPosX, returnPosY, 40, GRAY);
 

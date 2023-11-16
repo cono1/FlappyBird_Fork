@@ -13,7 +13,7 @@ void InitPlayer(Player& player)
 	player.speed = 200.0f;
 
 	player.width = 40;
-	player.height = 40;
+	player.height = 60;
 
 	player.fall = false;
 }
