@@ -88,7 +88,6 @@ void GameLoop()
 		case Screen::MENU:
 			break;
 		case Screen::GAME:
-			DrawObjects(player, playerColor, obstacle1, obstacle2);
 			GameDrawReturnButton(screen, returnToMenu);
 			break;
 		case Screen::CREDITS:

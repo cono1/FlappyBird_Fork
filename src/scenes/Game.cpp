@@ -13,15 +13,21 @@ void DrawObjects(Player player, Color playerColor, Obstacle obstacle1, Obstacle 
 	DrawRectangle(static_cast<int>(obstacle2.posX), static_cast<int>(obstacle2.posY), obstacle2.width, obstacle2.height, ORANGE);
 }
 
-void DrawTextures(Obstacle obstacle1, Obstacle obstacle2, Texture2D& foreground, Texture2D& midground, Texture2D& obstacleUp, Texture2D& obstacleDown, float& scrollingFore, float& scrollingBack)
+// dibuja el parallax
+void DrawParallax(Texture2D& foreground, Texture2D& midground, float& scrollingFore, float& scrollingBack)
 {
 	DrawTextureEx(midground, Vector2{ scrollingBack, 20 }, 0.0f, 2.0f, WHITE);
 	DrawTextureEx(midground, Vector2{ midground.width * 2 + scrollingBack, 20 }, 0.0f, 2.0f, WHITE);
 
 	DrawTextureEx(foreground, Vector2{ scrollingFore, 0 }, 0.0f, 2.0f, WHITE);
 	DrawTextureEx(foreground, Vector2{ foreground.width * 2 + scrollingFore, 0 }, 0.0f, 2.0f, WHITE);
+}
 
+// dibuja los obstaculos
+void DrawObstacles(Obstacle obstacle1, Obstacle obstacle2, Texture2D& obstacleUp, Texture2D& obstacleDown)
+{
 	DrawTexture(obstacleUp, static_cast<int>(obstacle1.posX), static_cast<int>(obstacle1.posY), WHITE);
+
 	DrawTexture(obstacleDown, static_cast<int>(obstacle2.posX), static_cast<int>(obstacle2.posY), WHITE);
 }
 
@@ -132,7 +138,11 @@ void Update(Player& player, Color& playerColor, Obstacle& obstacle1, Obstacle& o
 	if (scrollingFore <= -foreground.width * 2) scrollingFore = 0;
 	if (scrollingBack <= -midground.width * 2) scrollingBack = 0;
 
-	DrawTextures(obstacle1, obstacle2, foreground, midground, obstacleUp, obstacleDown, scrollingFore, scrollingBack);
+	DrawParallax(foreground, midground, scrollingFore, scrollingBack);
+
+	DrawObjects(player, playerColor, obstacle1, obstacle2);
+
+	DrawObstacles(obstacle1, obstacle2, obstacleUp, obstacleDown);
 
 	PlayerMovement(player, playerColor, playerDown, playerUp);
 
