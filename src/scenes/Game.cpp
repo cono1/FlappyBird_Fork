@@ -73,13 +73,18 @@ void ObstacleMovement(Obstacle& obstacle1, Obstacle& obstacle2, Player player)
 		obstacle1.posX = obstacle1.initPosX;
 
 		obstacle1.height = rand() % GetScreenHeight() - (player.height + player.height / 2);
+
+		if (obstacle1.height <= 0)
+		{
+			obstacle1.height = 10;
+		}
 	}
 
 	if (obstacle2.posX + obstacle2.width <= 0)
 	{
 		obstacle2.posX = obstacle2.initPosX;
 
-		obstacle2.posY = static_cast<float>(rand() % GetScreenHeight() + (obstacle1.height + player.height + player.height / 2));
+		obstacle2.posY = static_cast<float>(obstacle1.height + player.height * 2);
 
 		if (obstacle2.posY >= GetScreenHeight())
 		{
@@ -104,7 +109,7 @@ bool PlayerObstacleCollision(Player& player, Obstacle& obstacle)
 
 void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu)
 {
-	if (PlayerObstacleCollision(player, obstacle1) || player.fall || 
+	if (PlayerObstacleCollision(player, obstacle1) || player.fall ||
 		PlayerObstacleCollision(player, obstacle2) || returnToMenu)
 	{
 		ResetPlayer(player);
@@ -116,9 +121,9 @@ void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& r
 }
 
 void Update(Player& player, Color& playerColor, Obstacle& obstacle1, Obstacle& obstacle2,
-	Texture2D& foreground, Texture2D& midground, 
-	Texture2D& playerDown, Texture2D& playerUp, 
-	Texture2D& obstacleUp, Texture2D& obstacleDown, 
+	Texture2D& foreground, Texture2D& midground,
+	Texture2D& playerDown, Texture2D& playerUp,
+	Texture2D& obstacleUp, Texture2D& obstacleDown,
 	float& scrollingFore, float& scrollingBack, bool returnToMenu)
 {
 	scrollingFore -= 100.0f * GetFrameTime();
@@ -128,7 +133,7 @@ void Update(Player& player, Color& playerColor, Obstacle& obstacle1, Obstacle& o
 	if (scrollingBack <= -midground.width * 2) scrollingBack = 0;
 
 	DrawTextures(obstacle1, obstacle2, foreground, midground, obstacleUp, obstacleDown, scrollingFore, scrollingBack);
-	
+
 	PlayerMovement(player, playerColor, playerDown, playerUp);
 
 	PlayerScreenLimits(player);

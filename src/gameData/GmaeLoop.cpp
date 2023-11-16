@@ -88,8 +88,8 @@ void GameLoop()
 		case Screen::MENU:
 			break;
 		case Screen::GAME:
-			//DrawObjects(player, playerColor, obstacle1, obstacle2);
-			DrawReturnButton(screen, returnToMenu);
+			DrawObjects(player, playerColor, obstacle1, obstacle2);
+			GameDrawReturnButton(screen, returnToMenu);
 			break;
 		case Screen::CREDITS:
 			DrawCredits();
@@ -103,8 +103,13 @@ void GameLoop()
 	}
 
 	UnloadTexture(foreground);
+	UnloadTexture(background);
+
+	UnloadTexture(playerDown);
+	UnloadTexture(playerUp);
+
+	UnloadTexture(obstacleDown);
+	UnloadTexture(obstacleUp);
 
 	CloseWindow();
-
-
 }

@@ -12,3 +12,5 @@ void DrawMenu(Screen& screen);
 
 // botón que vuelve al menú
 void DrawReturnButton(Screen& screen, bool& returnToMenu);
+
+void GameDrawReturnButton(Screen& screen, bool& returnToMenu);
