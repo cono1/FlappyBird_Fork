@@ -96,7 +96,7 @@
       </EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /i /s "$(ProjectDir)res" "$(OutDir)/res" </Command>
+      <Command>"$(ProjectDir)scripts\copiar.bat"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -120,7 +120,7 @@
       <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /i /s "$(ProjectDir)res" "$(OutDir)/res" </Command>
+      <Command>"$(ProjectDir)scripts\copiar.bat"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
