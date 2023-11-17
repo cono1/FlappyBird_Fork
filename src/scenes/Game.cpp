@@ -4,6 +4,8 @@
 
 using namespace std;
 
+namespace game
+{
 void DrawObjects(Player player, Color playerColor, Obstacle obstacle1, Obstacle obstacle2)
 {
 	DrawRectangle(static_cast<int>(player.posX), static_cast<int>(player.posY), player.width, player.height, playerColor);
@@ -153,5 +155,5 @@ void Update(Player& player, Color& playerColor, Obstacle& obstacle1, Obstacle& o
 	ObstacleMovement(obstacle1, obstacle2, player);
 
 	ResetGame(player, obstacle1, obstacle2, returnToMenu);
-
+}
 }

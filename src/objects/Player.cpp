@@ -2,6 +2,8 @@
 
 #include "raylib.h"
 
+namespace game
+{
 void InitPlayer(Player& player)
 {
 	player.initPosX = 50;
@@ -27,4 +29,5 @@ void ResetPlayer(Player& player)
 	player.posY = player.initPosY;
 
 	player.fall = false;
+}
 }

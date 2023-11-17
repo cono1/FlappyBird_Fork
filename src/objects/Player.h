@@ -1,5 +1,7 @@
 #pragma once
 
+namespace game
+{
 struct Player
 {
 	float initPosX;
@@ -21,3 +23,4 @@ void InitPlayer(Player& player);
 
 // resetea la posición del jugador
 void ResetPlayer(Player& player);
+}

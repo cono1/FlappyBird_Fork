@@ -9,6 +9,8 @@
 
 using namespace std;
 
+namespace game
+{
 void InitAll(Player& player, Obstacle& obstacle1, Obstacle& obstacle2)
 {
 	srand(static_cast<unsigned int>(time(NULL)));
@@ -62,7 +64,7 @@ void GameLoop()
 	bool returnToMenu = false;
 
 	InitAll(player, obstacle1, obstacle2);
-	InitTextures(foreground, background, playerDown, playerUp, obstacleUp,obstacleDown);
+	InitTextures(foreground, background, playerDown, playerUp, obstacleUp, obstacleDown);
 
 	while (!WindowShouldClose())
 	{
@@ -111,4 +113,5 @@ void GameLoop()
 	UnloadTexture(obstacleUp);
 
 	CloseWindow();
+}
 }

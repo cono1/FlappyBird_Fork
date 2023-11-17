@@ -1,5 +1,7 @@
 #pragma once
 
+namespace game
+{
 enum class Screen
 {
 	MENU,
@@ -14,3 +16,4 @@ void DrawMenu(Screen& screen);
 void DrawReturnButton(Screen& screen, bool& returnToMenu);
 
 void GameDrawReturnButton(Screen& screen, bool& returnToMenu);
+}

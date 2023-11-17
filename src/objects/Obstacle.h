@@ -1,5 +1,7 @@
 #pragma once
 
+namespace game
+{
 struct Obstacle
 {
 	float initPosX;
@@ -19,3 +21,4 @@ void InitObstacle(Obstacle& obstacle, float posY, int height);
 
 // resetea la posicion del obstáculo
 void ResetObstacle(Obstacle& obstacle, float posY, int height);
+}

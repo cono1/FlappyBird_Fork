@@ -2,4 +2,7 @@
 
 #include "Menu.h"
 
+namespace game
+{
 void DrawCredits();
+}

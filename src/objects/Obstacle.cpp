@@ -2,6 +2,8 @@
 
 #include "raylib.h"
 
+namespace game
+{
 void InitObstacle(Obstacle& obstacle, float posY, int height)
 {
 	obstacle.initPosX = static_cast<float>(GetScreenWidth() - 40);
@@ -25,4 +27,5 @@ void ResetObstacle(Obstacle& obstacle, float posY, int height)
 	obstacle.posY = obstacle.initPosY;
 
 	obstacle.height = height;
+}
 }
