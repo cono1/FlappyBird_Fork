@@ -1,6 +1,7 @@
 #include "gameData/GameLoop.h"
 
 using namespace game;
+
 int main()
 {
 	game::GameLoop();
@@ -10,9 +11,9 @@ int main()
 
 //A corregir:
 //Importante:
-//- El nombre de los scripts esta en español mientras todo lo demás esta en ingles
 //- Bastantes numeros magicos en menu.cpp
 //- La función Update recibe 13 parametros, podrían ser menos.
+// -Que tome getKeyPressed y no keyDown para el mov del player
 //
 //	Player :
 //	-en player.cpp resetPLayer() sobra initPosX, Y.No hace falta.
@@ -22,7 +23,6 @@ int main()
 //-en gameLoop.h esta declarada una funcion que no se usa fuera de gameLoop.
 //
 //Menu :
-//	-En el menu.cpp hay un spelling error "...mosue to chosse an option"
 //	- Hay dos funciones que se llaman similar "DrawReturnButton" y "GameDrawReturnButton" y cumplen la misma funcion, se podria simplificar en una y pasarle los valores por parámetro.
 //
 //	Game :

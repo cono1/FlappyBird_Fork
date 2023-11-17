@@ -4,17 +4,24 @@
 
 namespace game
 {
+static int optionsSize;
+
 void DrawMenu(Screen& screen)
 {
-	DrawText("Flappy Bird", GetScreenWidth() / 2 - 250, GetScreenHeight() - 600, 100, WHITE);
-	DrawText("Use the left button of the mosue to chosse an option", GetScreenWidth() - 750, GetScreenHeight() / 2 - 100, 20, WHITE);
-	DrawText("Play", GetScreenWidth() / 2 - 40, GetScreenHeight() / 2, 30, RED);
-	DrawText("Credits", GetScreenWidth() / 2 - 40, GetScreenHeight() / 2 + 120, 30, RED);
+	int midScreenX = GetScreenWidth() / 2;
+	int midScreenY = GetScreenHeight() / 2;
+	optionsSize = 30;
 
-	if (GetMousePosition().x >= GetScreenWidth() / 2 - 40 && GetMousePosition().x <= GetScreenWidth() / 2 + 40
-		&& GetMousePosition().y >= GetScreenHeight() / 2 && GetMousePosition().y <= GetScreenHeight() / 2 + 20)
+	DrawText("Flappy Bird", midScreenX - 250, GetScreenHeight() - 600, 100, WHITE);
+	DrawText("Left click to choose", midScreenX, midScreenY - 100, 20, WHITE);
+	DrawText("Play", midScreenX - MeasureText("Play", optionsSize) / 2, midScreenY, optionsSize, RED);
+	DrawText("Credits", midScreenX - MeasureText("Credits", optionsSize) / 2, midScreenY + static_cast<int>(MeasureTextEx(GetFontDefault(), "Play", static_cast<float>(optionsSize), 0).y), optionsSize, RED);
+
+	if (GetMousePosition().x >= midScreenX - MeasureText("Play", optionsSize) / 2 &&
+		GetMousePosition().x <= midScreenX + MeasureText("Play", optionsSize) / 2 &&
+		GetMousePosition().y >= midScreenY && GetMousePosition().y <= midScreenY + optionsSize)
 	{
-		DrawText("Play", GetScreenWidth() / 2 - 40, GetScreenHeight() / 2, 30, DARKBROWN);
+		DrawText("Play", midScreenX - MeasureText("Play", optionsSize) / 2, GetScreenHeight() / 2, optionsSize, DARKBROWN);
 
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
@@ -22,10 +29,11 @@ void DrawMenu(Screen& screen)
 		}
 	}
 
-	if (GetMousePosition().x >= GetScreenWidth() / 2 - 40 && GetMousePosition().x <= GetScreenWidth() / 2 + 80
-		&& GetMousePosition().y >= GetScreenHeight() / 2 + 120 && GetMousePosition().y <= GetScreenHeight() / 2 + 140)
+	if (GetMousePosition().x >= midScreenX - MeasureText("Credits", optionsSize) / 2 &&
+		GetMousePosition().x <= midScreenX + MeasureText("Credits", optionsSize) / 2 && 
+		GetMousePosition().y >= midScreenY + static_cast<int>(MeasureTextEx(GetFontDefault(), "Play", static_cast<float>(optionsSize), 0).y) && GetMousePosition().y <= midScreenY + 140)
 	{
-		DrawText("Credits", GetScreenWidth() / 2 - 40, GetScreenHeight() / 2 + 120, 30, DARKBROWN);
+		DrawText("Credits", midScreenX - MeasureText("Credits", optionsSize) / 2, midScreenY + static_cast<int>(MeasureTextEx(GetFontDefault(), "Play", static_cast<float>(optionsSize), 0).y), 30, DARKBROWN);
 
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
