@@ -33,7 +33,7 @@
     <ClCompile Include="src\objects\Player.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="src\gameData\GmaeLoop.cpp">
+    <ClCompile Include="src\gameData\GameLoop.cpp">
       <Filter>GameLoop</Filter>
     </ClCompile>
     <ClCompile Include="src\scenes\Credits.cpp">
@@ -53,7 +53,7 @@
     <ClInclude Include="src\objects\Player.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="src\gameData\GmaeLoop.h">
+    <ClInclude Include="src\gameData\GameLoop.h">
       <Filter>GameLoop</Filter>
     </ClInclude>
     <ClInclude Include="src\scenes\Credits.h">

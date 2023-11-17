@@ -1,4 +1,4 @@
-#include "gameData/GmaeLoop.h"
+#include "gameData/GameLoop.h"
 
 using namespace game;
 int main()
@@ -10,14 +10,9 @@ int main()
 
 //A corregir:
 //Importante:
-//-No hay namespaces
 //- El nombre de los scripts esta en español mientras todo lo demás esta en ingles
 //- Bastantes numeros magicos en menu.cpp
-//- La altura de los pipes es fija.
 //- La función Update recibe 13 parametros, podrían ser menos.
-//
-//Archivos :
-//	Renombrar "gmaeLoop".
 //
 //	Player :
 //	-en player.cpp resetPLayer() sobra initPosX, Y.No hace falta.

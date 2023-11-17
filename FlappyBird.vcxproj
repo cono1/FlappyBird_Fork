@@ -96,7 +96,7 @@
       </EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>"$(ProjectDir)scripts\copiar.bat"</Command>
+      <Command>"$(ProjectDir)scripts\copy.bat"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -120,7 +120,7 @@
       <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>"$(ProjectDir)scripts\copiar.bat"</Command>
+      <Command>"$(ProjectDir)scripts\copy.bat"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -157,7 +157,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\gameData\GmaeLoop.cpp" />
+    <ClCompile Include="src\gameData\GameLoop.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\objects\Obstacle.cpp" />
     <ClCompile Include="src\objects\Player.cpp" />
@@ -166,7 +166,7 @@
     <ClCompile Include="src\scenes\Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\gameData\GmaeLoop.h" />
+    <ClInclude Include="src\gameData\GameLoop.h" />
     <ClInclude Include="src\objects\Obstacle.h" />
     <ClInclude Include="src\objects\Player.h" />
     <ClInclude Include="src\scenes\Credits.h" />
