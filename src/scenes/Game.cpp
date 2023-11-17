@@ -27,8 +27,10 @@ void DrawParallax(Texture2D& foreground, Texture2D& midground, float& scrollingF
 void DrawObstacles(Obstacle obstacle1, Obstacle obstacle2, Texture2D& obstacleUp, Texture2D& obstacleDown)
 {
 	DrawTexture(obstacleUp, static_cast<int>(obstacle1.posX), static_cast<int>(obstacle1.posY), WHITE);
+	obstacleUp.height = obstacle1.height;
 
 	DrawTexture(obstacleDown, static_cast<int>(obstacle2.posX), static_cast<int>(obstacle2.posY), WHITE);
+	obstacleDown.height = obstacle2.height;
 }
 
 // mov del jugador
