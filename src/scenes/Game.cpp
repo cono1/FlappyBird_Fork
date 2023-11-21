@@ -6,9 +6,9 @@ using namespace std;
 
 namespace game
 {
-void DrawObjects(Player player, Color playerColor, Obstacle obstacle1, Obstacle obstacle2)
+void DrawObjects(Player player, Obstacle obstacle1, Obstacle obstacle2)
 {
-	DrawRectangle(static_cast<int>(player.posX), static_cast<int>(player.posY), player.width, player.height, playerColor);
+	DrawRectangle(static_cast<int>(player.posX), static_cast<int>(player.posY), player.width, player.height, player.color);
 
 	DrawRectangle(static_cast<int>(obstacle1.posX), static_cast<int>(obstacle1.posY), obstacle1.width, obstacle1.height, ORANGE);
 
@@ -36,24 +36,24 @@ void DrawObstacles(Obstacle obstacle1, Obstacle obstacle2, Texture2D& obstacleUp
 }
 
 // mov del jugador
-void PlayerMovement(Player& player, Color& playerColor, Texture2D& playerDown, Texture2D& playerUp)
+void PlayerMovement(Player& player)
 {
 	if (IsKeyDown(KEY_W))
 	{
 		player.posY -= player.speed * GetFrameTime();
 
-		playerColor = RED;
+		player.color  = RED;
 
-		DrawTexture(playerUp, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
+		DrawTexture(player.playerUp, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
 	}
 
 	else
 	{
 		player.posY += player.speed * GetFrameTime();
 
-		playerColor = YELLOW;
+		player.color = YELLOW;
 
-		DrawTexture(playerDown, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
+		DrawTexture(player.playerDown, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
 	}
 }
 
@@ -130,9 +130,8 @@ void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& r
 	}
 }
 
-void Update(Player& player, Color& playerColor, Obstacle& obstacle1, Obstacle& obstacle2,
+void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2,
 	Texture2D& foreground, Texture2D& midground,
-	Texture2D& playerDown, Texture2D& playerUp,
 	Texture2D& obstacleUp, Texture2D& obstacleDown,
 	float& scrollingFore, float& scrollingBack, bool returnToMenu)
 {
@@ -144,11 +143,11 @@ void Update(Player& player, Color& playerColor, Obstacle& obstacle1, Obstacle& o
 
 	DrawParallax(foreground, midground, scrollingFore, scrollingBack);
 
-	DrawObjects(player, playerColor, obstacle1, obstacle2);
+	DrawObjects(player, obstacle1, obstacle2);
 
 	DrawObstacles(obstacle1, obstacle2, obstacleUp, obstacleDown);
 
-	PlayerMovement(player, playerColor, playerDown, playerUp);
+	PlayerMovement(player);
 
 	PlayerScreenLimits(player);
 

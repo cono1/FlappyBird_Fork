@@ -1,6 +1,5 @@
 #include "Player.h"
 
-#include "raylib.h"
 
 namespace game
 {
@@ -18,6 +17,10 @@ void InitPlayer(Player& player)
 	player.height = 60;
 
 	player.fall = false;
+
+	player.color = RED;
+	player.playerDown = LoadTexture("res/assets/player/pumpkinDown.png");
+	player.playerUp = LoadTexture("res/assets/player/pumpkinUp.png");
 }
 
 void ResetPlayer(Player& player)
@@ -29,5 +32,11 @@ void ResetPlayer(Player& player)
 	player.posY = player.initPosY;
 
 	player.fall = false;
+}
+
+void DeInitPlayer(Player& player)
+{
+	UnloadTexture(player.playerDown);
+	UnloadTexture(player.playerUp);
 }
 }

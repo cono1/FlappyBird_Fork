@@ -26,14 +26,10 @@ void InitAll(Player& player, Obstacle& obstacle1, Obstacle& obstacle2)
 }
 
 // carga las texturas
-void InitTextures(Texture2D& foreground, Texture2D& background,
-	Texture2D& playerDown, Texture2D& playerUp, Texture2D& obstacleUp, Texture2D& obstacleDown)
+void InitTextures(Texture2D& foreground, Texture2D& background, Texture2D& obstacleUp, Texture2D& obstacleDown)
 {
 	foreground = LoadTexture("res/assets/background/forestBack.png");
 	background = LoadTexture("res/assets/background/forestFore.png");
-
-	playerDown = LoadTexture("res/assets/player/pumpkinDown.png");
-	playerUp = LoadTexture("res/assets/player/pumpkinUp.png");
 
 	obstacleUp = LoadTexture("res/assets/obstacles/wood.png");
 	obstacleDown = LoadTexture("res/assets/obstacles/wood.png");
@@ -44,16 +40,12 @@ void GameLoop()
 	Screen screen = Screen::MENU;
 
 	Player player;
-	Color playerColor = RED;
 
 	Obstacle obstacle1;
 	Obstacle obstacle2;
 
 	Texture2D foreground;
 	Texture2D background;
-
-	Texture2D playerUp;
-	Texture2D playerDown;
 
 	Texture2D obstacleUp;
 	Texture2D obstacleDown;
@@ -64,7 +56,7 @@ void GameLoop()
 	bool returnToMenu = false;
 
 	InitAll(player, obstacle1, obstacle2);
-	InitTextures(foreground, background, playerDown, playerUp, obstacleUp, obstacleDown);
+	InitTextures(foreground, background, obstacleUp, obstacleDown);
 
 	while (!WindowShouldClose())
 	{
@@ -77,7 +69,7 @@ void GameLoop()
 			break;
 		case Screen::GAME:
 			ResetGame(player, obstacle1, obstacle2, returnToMenu);
-			Update(player, playerColor, obstacle1, obstacle2, foreground, background, playerDown, playerUp, obstacleUp, obstacleDown, scrollingFore, scrollingBack, returnToMenu);
+			Update(player, obstacle1, obstacle2, foreground, background,obstacleUp, obstacleDown, scrollingFore, scrollingBack, returnToMenu);
 			break;
 		case Screen::CREDITS:
 			break;
@@ -106,11 +98,11 @@ void GameLoop()
 	UnloadTexture(foreground);
 	UnloadTexture(background);
 
-	UnloadTexture(playerDown);
-	UnloadTexture(playerUp);
 
 	UnloadTexture(obstacleDown);
 	UnloadTexture(obstacleUp);
+
+	DeInitPlayer(player);
 
 	CloseWindow();
 }
