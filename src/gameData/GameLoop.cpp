@@ -19,10 +19,11 @@ void InitAll(Player& player, Obstacle& obstacle1, Obstacle& obstacle2)
 
 	const int screenWidth = 1080;
 	const int screenHeight = 720;
+	Vector2 player1InitPos = { 50, screenHeight / 2 };
 
 	InitWindow(screenWidth, screenHeight, "Flappy Bird 0.1");
 
-	InitPlayer(player);
+	InitPlayer(player, player1InitPos);
 	InitObstacle(obstacle1, 0.0f, 300);
 	InitObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());
 	InitParallax();
@@ -32,14 +33,14 @@ void GameLoop()
 {
 	Screen screen = Screen::MENU;
 
-	Player player;
+	Player player1;
 
 	Obstacle obstacle1;
 	Obstacle obstacle2;
 
 	bool returnToMenu = false;
 
-	InitAll(player, obstacle1, obstacle2);
+	InitAll(player1, obstacle1, obstacle2);
 
 	while (!WindowShouldClose())
 	{
@@ -51,7 +52,7 @@ void GameLoop()
 			break;
 		case Screen::GAME:
 			UpdateParallax();
-			Update(player, obstacle1, obstacle2, returnToMenu);
+			Update(player1, obstacle1, obstacle2, returnToMenu);
 			break;
 		case Screen::CREDITS:
 			break;
@@ -68,11 +69,11 @@ void GameLoop()
 		case Screen::GAME:
 			DrawParallax();
 #ifdef _DEBUG
-			DrawObjectsHitboxes(player, obstacle1, obstacle2);
+			DrawObjectsHitboxes(player1, obstacle1, obstacle2);
 #endif
 			DrawObstacles(obstacle1, obstacle2);
 			GameDrawReturnButton(screen, returnToMenu);
-			DrawPlayer(player);
+			DrawPlayer(player1);
 			break;
 		case Screen::CREDITS:
 			DrawCredits();
@@ -88,7 +89,7 @@ void GameLoop()
 	DeInitObstacle(obstacle1);
 	DeInitObstacle(obstacle2);
 
-	DeInitPlayer(player);
+	DeInitPlayer(player1);
 
 	CloseWindow();
 }

@@ -35,11 +35,11 @@ void DrawPlayer(Player player)
 {
 	if (player.isFlying)
 	{
-		DrawTexture(player.playerUp, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
+		DrawTexture(player.playerUpTexture, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
 	}
 	else
 	{
-		DrawTexture(player.playerDown, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
+		DrawTexture(player.playerDownTexture, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
 	}
 }
 

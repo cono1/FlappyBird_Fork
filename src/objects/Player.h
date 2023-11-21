@@ -21,12 +21,12 @@ struct Player
 	bool isFlying;
 
 	Color color;
-	Texture2D playerDown;
-	Texture2D playerUp;
+	Texture2D playerDownTexture;
+	Texture2D playerUpTexture;
 };
 
 // inicializa el jugador
-void InitPlayer(Player& player);
+void InitPlayer(Player& player, Vector2 initPos);
 
 // resetea la posición del jugador
 void ResetPlayer(Player& player);
