@@ -6,6 +6,12 @@ using namespace std;
 
 namespace game
 {
+void MovePlayer(Player& player);
+void CheckPlayerScreenLimits(Player& player);
+void MoveObstacles(Obstacle& obstacle1, Obstacle& obstacle2, Player player);
+bool CheckPlayerObstacleCollision(Player& player, Obstacle& obstacle);
+void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu);
+
 void DrawObjectsHitboxes(Player player, Obstacle obstacle1, Obstacle obstacle2)
 {
 	DrawRectangle(static_cast<int>(player.posX), static_cast<int>(player.posY), player.width, player.height, player.color);
@@ -37,14 +43,25 @@ void DrawPlayer(Player player)
 	}
 }
 
+void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool returnToMenu)
+{
+	MovePlayer(player);
+
+	CheckPlayerScreenLimits(player);
+
+	MoveObstacles(obstacle1, obstacle2, player);
+
+	ResetGame(player, obstacle1, obstacle2, returnToMenu);
+}
+
 // mov del jugador
-void PlayerMovement(Player& player)
+void MovePlayer(Player& player)
 {
 	if (IsKeyDown(KEY_W))
 	{
 		player.posY -= player.speed * GetFrameTime();
 
-		player.color  = RED;
+		player.color = RED;
 
 		player.isFlying = true;		
 	}
@@ -59,7 +76,7 @@ void PlayerMovement(Player& player)
 }
 
 // el jugador no desaparece por arriba y avisa si se va para abajo
-void PlayerScreenLimits(Player& player)
+void CheckPlayerScreenLimits(Player& player)
 {
 	if (player.posY <= 0)
 	{
@@ -73,16 +90,14 @@ void PlayerScreenLimits(Player& player)
 }
 
 // mov del obstáculo
-void ObstacleMovement(Obstacle& obstacle1, Obstacle& obstacle2, Player player)
+void MoveObstacles(Obstacle& obstacle1, Obstacle& obstacle2, Player player)
 {
 	obstacle1.posX -= obstacle1.speed * GetFrameTime();
-
 	obstacle2.posX -= obstacle2.speed * GetFrameTime();
 
 	if (obstacle1.posX + obstacle1.width <= 0)
 	{
 		obstacle1.posX = obstacle1.initPosX;
-
 		obstacle1.height = rand() % GetScreenHeight() - (player.height + player.height / 2);
 
 		if (obstacle1.height <= 0)
@@ -94,7 +109,6 @@ void ObstacleMovement(Obstacle& obstacle1, Obstacle& obstacle2, Player player)
 	if (obstacle2.posX + obstacle2.width <= 0)
 	{
 		obstacle2.posX = obstacle2.initPosX;
-
 		obstacle2.posY = static_cast<float>(obstacle1.height + player.height * 2);
 
 		if (obstacle2.posY >= GetScreenHeight())
@@ -105,23 +119,18 @@ void ObstacleMovement(Obstacle& obstacle1, Obstacle& obstacle2, Player player)
 }
 
 // colision del juagador con el obstáculo
-bool PlayerObstacleCollision(Player& player, Obstacle& obstacle)
+bool CheckPlayerObstacleCollision(Player& player, Obstacle& obstacle)
 {
-	if ((player.posX + player.width >= obstacle.posX) &&
-		(player.posX <= obstacle.posX + obstacle.width) &&
-		(player.posY + player.height >= obstacle.posY) &&
-		(player.posY <= obstacle.posY + obstacle.height))
-	{
-		return true;
-	}
-
-	return false;
+	return ((player.posX + player.width >= obstacle.posX) &&
+			(player.posX <= obstacle.posX + obstacle.width) &&
+			(player.posY + player.height >= obstacle.posY) &&
+			(player.posY <= obstacle.posY + obstacle.height));
 }
 
 void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu)
 {
-	if (PlayerObstacleCollision(player, obstacle1) || player.fall ||
-		PlayerObstacleCollision(player, obstacle2) || returnToMenu)
+	if (CheckPlayerObstacleCollision(player, obstacle1) || player.fall ||
+		CheckPlayerObstacleCollision(player, obstacle2) || returnToMenu)
 	{
 		ResetPlayer(player);
 		ResetObstacle(obstacle1, 0.0f, 300);
@@ -129,16 +138,5 @@ void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& r
 
 		returnToMenu = false;
 	}
-}
-
-void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool returnToMenu)
-{
-	PlayerMovement(player);
-
-	PlayerScreenLimits(player);
-
-	ObstacleMovement(obstacle1, obstacle2, player);
-
-	ResetGame(player, obstacle1, obstacle2, returnToMenu);
 }
 }

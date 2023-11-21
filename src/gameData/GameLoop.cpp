@@ -48,10 +48,8 @@ void GameLoop()
 		switch (screen)
 		{
 		case Screen::MENU:
-			DrawMenu(screen);
 			break;
 		case Screen::GAME:
-			//ResetGame(player, obstacle1, obstacle2, returnToMenu);
 			UpdateParallax();
 			Update(player, obstacle1, obstacle2, returnToMenu);
 			break;
@@ -65,6 +63,7 @@ void GameLoop()
 		switch (screen)
 		{
 		case Screen::MENU:
+			DrawMenu(screen);
 			break;
 		case Screen::GAME:
 			DrawParallax();
