@@ -60,17 +60,20 @@ void GameLoop()
 		}
 
 		BeginDrawing();
-		ClearBackground(WHITE);
+		ClearBackground(DARKGREEN);
 
 		switch (screen)
 		{
 		case Screen::MENU:
 			break;
 		case Screen::GAME:
-			GameDrawReturnButton(screen, returnToMenu);
 			DrawParallax();
-			DrawObjects(player, obstacle1, obstacle2);
+#ifdef _DEBUG
+			DrawObjectsHitboxes(player, obstacle1, obstacle2);
+#endif
 			DrawObstacles(obstacle1, obstacle2);
+			GameDrawReturnButton(screen, returnToMenu);
+			DrawPlayer(player);
 			break;
 		case Screen::CREDITS:
 			DrawCredits();
@@ -78,13 +81,11 @@ void GameLoop()
 			break;
 		}
 
-		ClearBackground(DARKGREEN);
-
 		EndDrawing();
 	}
 
-
 	DeInitParallax();
+
 	DeInitObstacle(obstacle1);
 	DeInitObstacle(obstacle2);
 

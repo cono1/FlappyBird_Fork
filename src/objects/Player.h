@@ -18,6 +18,7 @@ struct Player
 	int height;
 
 	bool fall;
+	bool isFlying;
 
 	Color color;
 	Texture2D playerDown;

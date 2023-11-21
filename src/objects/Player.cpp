@@ -16,6 +16,7 @@ void InitPlayer(Player& player)
 	player.height = 60;
 
 	player.fall = false;
+	player.isFlying = false;
 
 	player.color = RED;
 	player.playerDown = LoadTexture("res/assets/player/pumpkinDown.png");

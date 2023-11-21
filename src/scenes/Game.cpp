@@ -6,10 +6,7 @@ using namespace std;
 
 namespace game
 {
-	//initparallax()
-
-
-void DrawObjects(Player player, Obstacle obstacle1, Obstacle obstacle2)
+void DrawObjectsHitboxes(Player player, Obstacle obstacle1, Obstacle obstacle2)
 {
 	DrawRectangle(static_cast<int>(player.posX), static_cast<int>(player.posY), player.width, player.height, player.color);
 
@@ -17,7 +14,6 @@ void DrawObjects(Player player, Obstacle obstacle1, Obstacle obstacle2)
 
 	DrawRectangle(static_cast<int>(obstacle2.posX), static_cast<int>(obstacle2.posY), obstacle2.width, obstacle2.height, ORANGE);
 }
-
 
 // dibuja los obstaculos
 void DrawObstacles(Obstacle& obstacle1, Obstacle& obstacle2)
@@ -29,6 +25,18 @@ void DrawObstacles(Obstacle& obstacle1, Obstacle& obstacle2)
 	obstacle2.obstacleDownTexture.height = obstacle2.height;
 }
 
+void DrawPlayer(Player player)
+{
+	if (player.isFlying)
+	{
+		DrawTexture(player.playerUp, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
+	}
+	else
+	{
+		DrawTexture(player.playerDown, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
+	}
+}
+
 // mov del jugador
 void PlayerMovement(Player& player)
 {
@@ -38,16 +46,15 @@ void PlayerMovement(Player& player)
 
 		player.color  = RED;
 
-		DrawTexture(player.playerUp, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
+		player.isFlying = true;		
 	}
-
 	else
 	{
 		player.posY += player.speed * GetFrameTime();
 
 		player.color = YELLOW;
 
-		DrawTexture(player.playerDown, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
+		player.isFlying = false;		
 	}
 }
 
