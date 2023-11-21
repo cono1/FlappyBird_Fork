@@ -26,13 +26,10 @@ void InitAll(Player& player, Obstacle& obstacle1, Obstacle& obstacle2)
 }
 
 // carga las texturas
-void InitTextures(Texture2D& foreground, Texture2D& background, Texture2D& obstacleUp, Texture2D& obstacleDown)
+void InitTextures(Texture2D& foreground, Texture2D& background)
 {
 	foreground = LoadTexture("res/assets/background/forestBack.png");
 	background = LoadTexture("res/assets/background/forestFore.png");
-
-	obstacleUp = LoadTexture("res/assets/obstacles/wood.png");
-	obstacleDown = LoadTexture("res/assets/obstacles/wood.png");
 }
 
 void GameLoop()
@@ -46,17 +43,13 @@ void GameLoop()
 
 	Texture2D foreground;
 	Texture2D background;
-
-	Texture2D obstacleUp;
-	Texture2D obstacleDown;
-
 	float scrollingFore = 0.0f;
 	float scrollingBack = 0.0f;
 
 	bool returnToMenu = false;
 
 	InitAll(player, obstacle1, obstacle2);
-	InitTextures(foreground, background, obstacleUp, obstacleDown);
+	InitTextures(foreground, background);
 
 	while (!WindowShouldClose())
 	{
@@ -69,7 +62,7 @@ void GameLoop()
 			break;
 		case Screen::GAME:
 			ResetGame(player, obstacle1, obstacle2, returnToMenu);
-			Update(player, obstacle1, obstacle2, foreground, background,obstacleUp, obstacleDown, scrollingFore, scrollingBack, returnToMenu);
+			Update(player, obstacle1, obstacle2, foreground, background, scrollingFore, scrollingBack, returnToMenu);
 			break;
 		case Screen::CREDITS:
 			break;
@@ -99,8 +92,8 @@ void GameLoop()
 	UnloadTexture(background);
 
 
-	UnloadTexture(obstacleDown);
-	UnloadTexture(obstacleUp);
+	DeInitObstacle(obstacle1);
+	DeInitObstacle(obstacle2);
 
 	DeInitPlayer(player);
 

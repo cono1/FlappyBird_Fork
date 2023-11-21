@@ -1,7 +1,5 @@
 #include "Obstacle.h"
 
-#include "raylib.h"
-
 namespace game
 {
 void InitObstacle(Obstacle& obstacle, float posY, int height)
@@ -16,6 +14,9 @@ void InitObstacle(Obstacle& obstacle, float posY, int height)
 	obstacle.height = height;
 
 	obstacle.speed = 250.0f;
+
+	obstacle.obstacleUpTexture = LoadTexture("res/assets/obstacles/wood.png");
+	obstacle.obstacleDownTexture = LoadTexture("res/assets/obstacles/wood.png");
 }
 
 void ResetObstacle(Obstacle& obstacle, float posY, int height)
@@ -27,5 +28,11 @@ void ResetObstacle(Obstacle& obstacle, float posY, int height)
 	obstacle.posY = obstacle.initPosY;
 
 	obstacle.height = height;
+}
+
+void DeInitObstacle(Obstacle& obstacle)
+{
+	UnloadTexture(obstacle.obstacleDownTexture);
+	UnloadTexture(obstacle.obstacleUpTexture);
 }
 }

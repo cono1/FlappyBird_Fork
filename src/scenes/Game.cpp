@@ -26,13 +26,13 @@ void DrawParallax(Texture2D& foreground, Texture2D& midground, float& scrollingF
 }
 
 // dibuja los obstaculos
-void DrawObstacles(Obstacle obstacle1, Obstacle obstacle2, Texture2D& obstacleUp, Texture2D& obstacleDown)
+void DrawObstacles(Obstacle& obstacle1, Obstacle& obstacle2)
 {
-	DrawTexture(obstacleUp, static_cast<int>(obstacle1.posX), static_cast<int>(obstacle1.posY), WHITE);
-	obstacleUp.height = obstacle1.height;
+	DrawTexture(obstacle1.obstacleUpTexture, static_cast<int>(obstacle1.posX), static_cast<int>(obstacle1.posY), WHITE);
+	obstacle1.obstacleUpTexture.height = obstacle1.height;
 
-	DrawTexture(obstacleDown, static_cast<int>(obstacle2.posX), static_cast<int>(obstacle2.posY), WHITE);
-	obstacleDown.height = obstacle2.height;
+	DrawTexture(obstacle2.obstacleDownTexture, static_cast<int>(obstacle2.posX), static_cast<int>(obstacle2.posY), WHITE);
+	obstacle2.obstacleDownTexture.height = obstacle2.height;
 }
 
 // mov del jugador
@@ -132,7 +132,6 @@ void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& r
 
 void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2,
 	Texture2D& foreground, Texture2D& midground,
-	Texture2D& obstacleUp, Texture2D& obstacleDown,
 	float& scrollingFore, float& scrollingBack, bool returnToMenu)
 {
 	scrollingFore -= 100.0f * GetFrameTime();
@@ -145,7 +144,7 @@ void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2,
 
 	DrawObjects(player, obstacle1, obstacle2);
 
-	DrawObstacles(obstacle1, obstacle2, obstacleUp, obstacleDown);
+	DrawObstacles(obstacle1, obstacle2);
 
 	PlayerMovement(player);
 

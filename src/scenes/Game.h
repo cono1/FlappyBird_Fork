@@ -18,6 +18,5 @@ void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& r
 // updatea el juego
 void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2,
 	Texture2D& foreground, Texture2D& midground,
-	Texture2D& obstacleUp, Texture2D& obstacleDown,
 	float& scrollingFore, float& scrollingBack, bool returnToMenu);
 }
