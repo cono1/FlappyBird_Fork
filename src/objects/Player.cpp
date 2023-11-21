@@ -1,6 +1,5 @@
 #include "Player.h"
 
-
 namespace game
 {
 void InitPlayer(Player& player)

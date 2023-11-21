@@ -6,6 +6,9 @@ using namespace std;
 
 namespace game
 {
+	//initparallax()
+
+
 void DrawObjects(Player player, Obstacle obstacle1, Obstacle obstacle2)
 {
 	DrawRectangle(static_cast<int>(player.posX), static_cast<int>(player.posY), player.width, player.height, player.color);
@@ -15,15 +18,6 @@ void DrawObjects(Player player, Obstacle obstacle1, Obstacle obstacle2)
 	DrawRectangle(static_cast<int>(obstacle2.posX), static_cast<int>(obstacle2.posY), obstacle2.width, obstacle2.height, ORANGE);
 }
 
-// dibuja el parallax
-void DrawParallax(Texture2D& foreground, Texture2D& midground, float& scrollingFore, float& scrollingBack)
-{
-	DrawTextureEx(midground, Vector2{ scrollingBack, 20 }, 0.0f, 2.0f, WHITE);
-	DrawTextureEx(midground, Vector2{ midground.width * 2 + scrollingBack, 20 }, 0.0f, 2.0f, WHITE);
-
-	DrawTextureEx(foreground, Vector2{ scrollingFore, 0 }, 0.0f, 2.0f, WHITE);
-	DrawTextureEx(foreground, Vector2{ foreground.width * 2 + scrollingFore, 0 }, 0.0f, 2.0f, WHITE);
-}
 
 // dibuja los obstaculos
 void DrawObstacles(Obstacle& obstacle1, Obstacle& obstacle2)
@@ -130,22 +124,8 @@ void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& r
 	}
 }
 
-void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2,
-	Texture2D& foreground, Texture2D& midground,
-	float& scrollingFore, float& scrollingBack, bool returnToMenu)
+void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool returnToMenu)
 {
-	scrollingFore -= 100.0f * GetFrameTime();
-	scrollingBack -= 50.0f * GetFrameTime();
-
-	if (scrollingFore <= -foreground.width * 2) scrollingFore = 0;
-	if (scrollingBack <= -midground.width * 2) scrollingBack = 0;
-
-	DrawParallax(foreground, midground, scrollingFore, scrollingBack);
-
-	DrawObjects(player, obstacle1, obstacle2);
-
-	DrawObstacles(obstacle1, obstacle2);
-
 	PlayerMovement(player);
 
 	PlayerScreenLimits(player);

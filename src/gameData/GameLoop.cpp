@@ -1,11 +1,13 @@
 #include "GameLoop.h"
 
+#include <iostream>
+
+#include "raylib.h"
+
 #include "scenes/Menu.h"
 #include "scenes/Game.h"
 #include "scenes/Credits.h"
-
-#include "raylib.h"
-#include <iostream>
+#include "objects/Parallax.h"
 
 using namespace std;
 
@@ -23,13 +25,7 @@ void InitAll(Player& player, Obstacle& obstacle1, Obstacle& obstacle2)
 	InitPlayer(player);
 	InitObstacle(obstacle1, 0.0f, 300);
 	InitObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());
-}
-
-// carga las texturas
-void InitTextures(Texture2D& foreground, Texture2D& background)
-{
-	foreground = LoadTexture("res/assets/background/forestBack.png");
-	background = LoadTexture("res/assets/background/forestFore.png");
+	InitParallax();
 }
 
 void GameLoop()
@@ -41,15 +37,9 @@ void GameLoop()
 	Obstacle obstacle1;
 	Obstacle obstacle2;
 
-	Texture2D foreground;
-	Texture2D background;
-	float scrollingFore = 0.0f;
-	float scrollingBack = 0.0f;
-
 	bool returnToMenu = false;
 
 	InitAll(player, obstacle1, obstacle2);
-	InitTextures(foreground, background);
 
 	while (!WindowShouldClose())
 	{
@@ -61,14 +51,16 @@ void GameLoop()
 			DrawMenu(screen);
 			break;
 		case Screen::GAME:
-			ResetGame(player, obstacle1, obstacle2, returnToMenu);
-			Update(player, obstacle1, obstacle2, foreground, background, scrollingFore, scrollingBack, returnToMenu);
+			//ResetGame(player, obstacle1, obstacle2, returnToMenu);
+			UpdateParallax();
+			Update(player, obstacle1, obstacle2, returnToMenu);
 			break;
 		case Screen::CREDITS:
 			break;
 		}
 
 		BeginDrawing();
+		ClearBackground(WHITE);
 
 		switch (screen)
 		{
@@ -76,6 +68,9 @@ void GameLoop()
 			break;
 		case Screen::GAME:
 			GameDrawReturnButton(screen, returnToMenu);
+			DrawParallax();
+			DrawObjects(player, obstacle1, obstacle2);
+			DrawObstacles(obstacle1, obstacle2);
 			break;
 		case Screen::CREDITS:
 			DrawCredits();
@@ -88,10 +83,8 @@ void GameLoop()
 		EndDrawing();
 	}
 
-	UnloadTexture(foreground);
-	UnloadTexture(background);
 
-
+	DeInitParallax();
 	DeInitObstacle(obstacle1);
 	DeInitObstacle(obstacle2);
 
