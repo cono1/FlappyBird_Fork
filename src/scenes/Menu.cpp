@@ -14,6 +14,7 @@ void DrawMenu(Screen& screen)
 	std::string specText = "Left click to choose";
 	std::string sPlayerText = "Singleplayer";
 	std::string mPlayerText = "Multiplayer";
+	std::string rulesText = "How to play";
 	std::string creditsText = "Credits";
 
 	int midScreenX = GetScreenWidth() / 2;
@@ -22,9 +23,10 @@ void DrawMenu(Screen& screen)
 	Vector2 singlePlayerPos{ midScreenX - static_cast<float>(MeasureText(sPlayerText.c_str(), optionsSize)) / 2, static_cast<float>(midScreenY) };
 	Vector2 multiPlayerPos{ midScreenX - static_cast<float>(MeasureText(mPlayerText.c_str(), optionsSize)) / 2, 
 							midScreenY + MeasureTextEx(GetFontDefault(), sPlayerText.c_str(), static_cast<float>(optionsSize), 0).y };
-	Vector2 creditsPos{ midScreenX - static_cast<float>(MeasureText(creditsText.c_str(), optionsSize)) / 2, 
-						midScreenY + static_cast<int>(MeasureTextEx(GetFontDefault(), sPlayerText.c_str(), static_cast<float>(optionsSize), 0).y) +
-						MeasureTextEx(GetFontDefault(), mPlayerText.c_str(), static_cast<float>(optionsSize), 0).y };
+	Vector2 rulesPos{ midScreenX - static_cast<float>(MeasureText(rulesText.c_str(), optionsSize)) / 2,
+						midScreenY + MeasureTextEx(GetFontDefault(), rulesText.c_str(), static_cast<float>(optionsSize), 0).y * 2 };
+	Vector2 creditsPos{ midScreenX - static_cast<float>(MeasureText(creditsText.c_str(), optionsSize)) / 2,
+						midScreenY + MeasureTextEx(GetFontDefault(), sPlayerText.c_str(), static_cast<float>(optionsSize), 0).y * 3 };
 
 
 	int titleSize = 100; 
@@ -35,6 +37,7 @@ void DrawMenu(Screen& screen)
 	DrawText(specText.c_str(), midScreenX, midScreenY - 100, otherTextsize, WHITE);
 	DrawText(sPlayerText.c_str(), static_cast<int>(singlePlayerPos.x), static_cast<int>(singlePlayerPos.y), optionsSize, RED);
 	DrawText(mPlayerText.c_str(), static_cast<int>(multiPlayerPos.x), static_cast<int>(multiPlayerPos.y), optionsSize, RED);
+	DrawText(rulesText.c_str(), static_cast<int>(rulesPos.x), static_cast<int>(rulesPos.y), optionsSize, RED);
 	DrawText(creditsText.c_str(), static_cast<int>(creditsPos.x), static_cast<int>(creditsPos.y), optionsSize, RED);
 
 	if (GetMousePosition().x >= singlePlayerPos.x &&
@@ -60,6 +63,19 @@ void DrawMenu(Screen& screen)
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 			screen = Screen::MULTIPLAYER;
+		}
+	}
+
+	if (GetMousePosition().x >= rulesPos.x &&
+		GetMousePosition().x <= rulesPos.x + MeasureText(rulesText.c_str(), optionsSize) &&
+		GetMousePosition().y >= rulesPos.y &&
+		GetMousePosition().y <= rulesPos.y + MeasureTextEx(GetFontDefault(), rulesText.c_str(), static_cast<float>(optionsSize), 0).y)
+	{
+		DrawText(rulesText.c_str(), static_cast<int>(rulesPos.x), static_cast<int>(rulesPos.y), optionsSize, DARKBROWN);
+
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		{
+			//screen = Screen::RULES;
 		}
 	}
 
