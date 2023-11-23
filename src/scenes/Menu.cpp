@@ -75,7 +75,7 @@ void DrawMenu(Screen& screen)
 
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
-			//screen = Screen::RULES;
+			screen = Screen::RULES;
 		}
 	}
 
@@ -93,26 +93,6 @@ void DrawMenu(Screen& screen)
 	}
 
 	DrawText("0.2", GetScreenWidth() - 60, GetScreenHeight() - 40, 40, WHITE);
-}
-
-void DrawReturnButton(Screen& screen, bool& returnToMenu)
-{
-	int returnPosX = 40;
-	int returnPosY = GetScreenHeight() - 50;
-
-	DrawText("Return", returnPosX, returnPosY, 40, BLACK);
-
-	if (GetMousePosition().x >= returnPosX && GetMousePosition().x <= returnPosX + 140
-		&& GetMousePosition().y >= returnPosY && GetMousePosition().y <= returnPosY + 40)
-	{
-		DrawText("Return", returnPosX, returnPosY, 40, GRAY);
-
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-		{
-			screen = Screen::MENU;
-			returnToMenu = true;
-		}
-	}
 }
 
 void GameDrawReturnButton(Screen& screen, bool& returnToMenu)

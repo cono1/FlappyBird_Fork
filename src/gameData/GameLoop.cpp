@@ -7,6 +7,7 @@
 #include "scenes/Menu.h"
 #include "scenes/Game.h"
 #include "scenes/Credits.h"
+#include "scenes/Rules.h"
 #include "objects/Parallax.h"
 
 using namespace std;
@@ -61,6 +62,8 @@ void GameLoop()
 			UpdateParallax();
 			Update(player1, player2, obstacle1, obstacle2, returnToMenu);
 			break;
+		case Screen::RULES:
+			break;
 		case Screen::CREDITS:
 			break;
 		}
@@ -89,9 +92,13 @@ void GameLoop()
 			DrawPlayer(player1);
 			DrawPlayer(player2);
 			break;
+		case Screen::RULES:
+			GameDrawReturnButton(screen, returnToMenu);
+			DrawRules();
+			break;
 		case Screen::CREDITS:
 			DrawCredits();
-			DrawReturnButton(screen, returnToMenu);
+			GameDrawReturnButton(screen, returnToMenu);
 			break;
 		}
 
