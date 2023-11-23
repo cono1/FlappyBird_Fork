@@ -50,7 +50,7 @@ void GameLoop()
 		{
 		case Screen::MENU:
 			break;
-		case Screen::GAME:
+		case Screen::SINGLEPLAYER:
 			UpdateParallax();
 			Update(player1, obstacle1, obstacle2, returnToMenu);
 			break;
@@ -66,7 +66,7 @@ void GameLoop()
 		case Screen::MENU:
 			DrawMenu(screen);
 			break;
-		case Screen::GAME:
+		case Screen::SINGLEPLAYER:
 			DrawParallax();
 #ifdef _DEBUG
 			DrawObjectsHitboxes(player1, obstacle1, obstacle2);

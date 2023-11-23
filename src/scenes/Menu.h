@@ -5,7 +5,8 @@ namespace game
 enum class Screen
 {
 	MENU,
-	GAME,
+	SINGLEPLAYER,
+	MULTIPLAYER,
 	CREDITS
 };
 
