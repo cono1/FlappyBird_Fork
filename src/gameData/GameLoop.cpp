@@ -13,19 +13,21 @@ using namespace std;
 
 namespace game
 {
-void InitAll(Player& player, Obstacle& obstacle1, Obstacle& obstacle2)
+void InitAll(Player& player1, Player& player2, Obstacle& obstacle1, Obstacle& obstacle2)
 {
 	srand(static_cast<unsigned int>(time(NULL)));
 
 	const int screenWidth = 1080;
 	const int screenHeight = 720;
 	Vector2 player1InitPos = { 50, screenHeight / 2 };
+	Vector2 player2InitPos = { player1InitPos.x + 80, player1InitPos.y };
 
 	InitWindow(screenWidth, screenHeight, "Flappy Bird 0.1");
 
-	InitPlayer(player, player1InitPos);
+	InitPlayer(player1, player1InitPos);
+	InitPlayer(player2, player2InitPos);
 	InitObstacle(obstacle1, 0.0f, 300);
-	InitObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());
+	InitObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player1.height), GetScreenHeight());
 	InitParallax();
 }
 
@@ -34,13 +36,14 @@ void GameLoop()
 	Screen screen = Screen::MENU;
 
 	Player player1;
+	Player player2;
 
 	Obstacle obstacle1;
 	Obstacle obstacle2;
 
 	bool returnToMenu = false;
 
-	InitAll(player1, obstacle1, obstacle2);
+	InitAll(player1, player2, obstacle1, obstacle2);
 
 	while (!WindowShouldClose())
 	{
@@ -53,6 +56,10 @@ void GameLoop()
 		case Screen::SINGLEPLAYER:
 			UpdateParallax();
 			Update(player1, obstacle1, obstacle2, returnToMenu);
+			break;
+		case Screen::MULTIPLAYER:
+			UpdateParallax();
+			Update(player1, player2, obstacle1, obstacle2, returnToMenu);
 			break;
 		case Screen::CREDITS:
 			break;
@@ -74,6 +81,13 @@ void GameLoop()
 			DrawObstacles(obstacle1, obstacle2);
 			GameDrawReturnButton(screen, returnToMenu);
 			DrawPlayer(player1);
+			break;
+		case Screen::MULTIPLAYER:
+			DrawParallax();
+			DrawObstacles(obstacle1, obstacle2);
+			GameDrawReturnButton(screen, returnToMenu);
+			DrawPlayer(player1);
+			DrawPlayer(player2);
 			break;
 		case Screen::CREDITS:
 			DrawCredits();

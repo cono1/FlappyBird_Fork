@@ -6,7 +6,7 @@ using namespace std;
 
 namespace game
 {
-void MovePlayer(Player& player);
+void MovePlayer(Player& player, KeyboardKey key);
 void CheckPlayerScreenLimits(Player& player);
 void MoveObstacles(Obstacle& obstacle1, Obstacle& obstacle2, Player player);
 bool CheckPlayerObstacleCollision(Player& player, Obstacle& obstacle);
@@ -43,9 +43,9 @@ void DrawPlayer(Player player)
 	}
 }
 
-void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool returnToMenu)
+void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu)
 {
-	MovePlayer(player);
+	MovePlayer(player, KEY_SPACE);
 
 	CheckPlayerScreenLimits(player);
 
@@ -54,10 +54,24 @@ void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool retur
 	ResetGame(player, obstacle1, obstacle2, returnToMenu);
 }
 
-// mov del jugador
-void MovePlayer(Player& player)
+void Update(Player& player1, Player& player2, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu)
 {
-	if (IsKeyDown(KEY_W))
+	MovePlayer(player1, KEY_W);
+	MovePlayer(player2, KEY_SPACE);
+
+	CheckPlayerScreenLimits(player1);
+	CheckPlayerScreenLimits(player2);
+
+	MoveObstacles(obstacle1, obstacle2, player1);
+
+	ResetGame(player1, obstacle1, obstacle2, returnToMenu);
+	ResetGame(player2, obstacle1, obstacle2, returnToMenu);
+}
+
+// mov del jugador
+void MovePlayer(Player& player, KeyboardKey key)
+{
+	if (IsKeyDown(key))
 	{
 		player.posY -= player.speed * GetFrameTime();
 

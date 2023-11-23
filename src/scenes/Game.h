@@ -14,5 +14,6 @@ void DrawObstacles(Obstacle& obstacle1, Obstacle& obstacle2);
 void DrawPlayer(Player player);
 
 // updatea el juego
-void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool returnToMenu);
+void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu);
+void Update(Player& player1, Player& player2, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu);
 }

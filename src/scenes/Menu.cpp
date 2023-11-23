@@ -59,7 +59,7 @@ void DrawMenu(Screen& screen)
 
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
-			//screen = Screen::MULTIPLAYER;
+			screen = Screen::MULTIPLAYER;
 		}
 	}
 
