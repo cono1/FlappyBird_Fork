@@ -92,7 +92,7 @@ void DrawMenu(Screen& screen)
 		}
 	}
 
-	DrawText("0.2", GetScreenWidth() - 60, GetScreenHeight() - 40, 40, WHITE);
+	DrawText("0.3", GetScreenWidth() - 60, GetScreenHeight() - 40, 40, WHITE);
 }
 
 void GameDrawReturnButton(Screen& screen, bool& returnToMenu)

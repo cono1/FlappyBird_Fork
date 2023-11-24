@@ -23,7 +23,7 @@ void InitAll(Player& player1, Player& player2, Obstacle& obstacle1, Obstacle& ob
 	Vector2 player1InitPos = { 50, screenHeight / 2 };
 	Vector2 player2InitPos = { player1InitPos.x + 80, player1InitPos.y };
 
-	InitWindow(screenWidth, screenHeight, "Flappy Bird 0.1");
+	InitWindow(screenWidth, screenHeight, "Flappy Bird 0.3");
 
 	InitPlayer(player1, player1InitPos);
 	InitPlayer(player2, player2InitPos);
