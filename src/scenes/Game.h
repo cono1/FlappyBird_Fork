@@ -8,12 +8,14 @@
 
 namespace game
 {
+void InitGameObjects();
+
 // dibuja el player y lso obstáculos
 void DrawObjectsHitboxes(Player player, Obstacle obstacle1, Obstacle obstacle2);
-void DrawObstacles(Obstacle& obstacle1, Obstacle& obstacle2);
-void DrawPlayer(Player player);
+void DrawObstacles();
+void DrawPlayer(bool isSinglePlayer);
 
-// updatea el juego
-void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu, Screen& scene);
-void Update(Player& player1, Player& player2, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu, Screen& scene);
+void Update(bool& returnToMenu, Screen& scene, bool isSinglePlayer);
+
+void DeInitGame();
 }

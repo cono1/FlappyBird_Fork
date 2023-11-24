@@ -9,15 +9,31 @@ using namespace std;
 
 namespace game
 {
+static Player player1;
+static Player player2;
+static Obstacle obstacle1;
+static Obstacle obstacle2;
+
 void MovePlayer(Player& player, KeyboardKey key);
 void CheckPlayerScreenLimits(Player& player);
-void MoveObstacles(Obstacle& obstacle1, Obstacle& obstacle2, Player player);
+void MoveObstacles(Player player);
 bool CheckPlayerObstacleCollision(Player& player, Obstacle& obstacle);
-void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu, Screen& scene);
+void ResetGame(Player& player, bool& returnToMenu, Screen& scene);
 
-void DrawObjectsHitboxes(Player player, Obstacle obstacle1, Obstacle obstacle2)
+void InitGameObjects()
 {
-	DrawRectangle(static_cast<int>(player.posX), static_cast<int>(player.posY), player.width, player.height, player.color);
+	Vector2 player1InitPos = { 80, static_cast<float>(GetScreenHeight()) / 2 };
+	Vector2 player2InitPos = { player1InitPos.x - 80, player1InitPos.y };
+
+	InitPlayer(player1, player1InitPos);
+	InitPlayer(player2, player2InitPos);
+	InitObstacle(obstacle1, 0.0f, 300);
+	InitObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player1.height), GetScreenHeight());
+}
+
+void DrawObjectsHitboxes()
+{
+	DrawRectangle(static_cast<int>(player1.posX), static_cast<int>(player1.posY), player1.width, player1.height, player1.color);
 
 	DrawRectangle(static_cast<int>(obstacle1.posX), static_cast<int>(obstacle1.posY), obstacle1.width, obstacle1.height, ORANGE);
 
@@ -25,7 +41,7 @@ void DrawObjectsHitboxes(Player player, Obstacle obstacle1, Obstacle obstacle2)
 }
 
 // dibuja los obstaculos
-void DrawObstacles(Obstacle& obstacle1, Obstacle& obstacle2)
+void DrawObstacles()
 {
 	DrawTexture(obstacle1.obstacleUpTexture, static_cast<int>(obstacle1.posX), static_cast<int>(obstacle1.posY), WHITE);
 	obstacle1.obstacleUpTexture.height = obstacle1.height;
@@ -34,42 +50,51 @@ void DrawObstacles(Obstacle& obstacle1, Obstacle& obstacle2)
 	obstacle2.obstacleDownTexture.height = obstacle2.height;
 }
 
-void DrawPlayer(Player player)
+void DrawPlayer(bool isSinglePlayer)
 {
-	if (player.isFlying)
+	if (player1.isFlying)
 	{
-		DrawTexture(player.playerUpTexture, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
+		DrawTexture(player1.playerUpTexture, static_cast<int>(player1.posX), static_cast<int>(player1.posY), WHITE);
 	}
 	else
 	{
-		DrawTexture(player.playerDownTexture, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
+		DrawTexture(player1.playerDownTexture, static_cast<int>(player1.posX), static_cast<int>(player1.posY), WHITE);
+	}
+
+	if (!isSinglePlayer)
+	{
+		if (player2.isFlying)
+		{
+			DrawTexture(player2.playerUpTexture, static_cast<int>(player2.posX), static_cast<int>(player2.posY), WHITE);
+		}
+		else
+		{
+			DrawTexture(player2.playerDownTexture, static_cast<int>(player2.posX), static_cast<int>(player2.posY), WHITE);
+		}
 	}
 }
 
 
-void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu, Screen& scene)
+void Update(bool& returnToMenu, Screen& scene, bool isSinglePlayer)
 {
-	MovePlayer(player, KEY_SPACE);
-
-	CheckPlayerScreenLimits(player);
-
-	MoveObstacles(obstacle1, obstacle2, player);
-
-	ResetGame(player, obstacle1, obstacle2, returnToMenu, scene);
-}
-
-void Update(Player& player1, Player& player2, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu, Screen& scene)
-{
-	MovePlayer(player1, KEY_W);
-	MovePlayer(player2, KEY_SPACE);
+	MovePlayer(player1, KEY_SPACE);
 
 	CheckPlayerScreenLimits(player1);
-	CheckPlayerScreenLimits(player2);
 
-	MoveObstacles(obstacle1, obstacle2, player1);
+	MoveObstacles(player1);
 
-	ResetGame(player1, obstacle1, obstacle2, returnToMenu, scene);
-	ResetGame(player2, obstacle1, obstacle2, returnToMenu, scene);
+	ResetGame(player1, returnToMenu, scene);
+
+	if (!isSinglePlayer)
+	{
+		MovePlayer(player2, KEY_W);
+
+		CheckPlayerScreenLimits(player2);
+
+		MoveObstacles(player2);
+
+		ResetGame(player2, returnToMenu, scene);
+	}
 }
 
 // mov del jugador
@@ -108,7 +133,7 @@ void CheckPlayerScreenLimits(Player& player)
 }
 
 // mov del obstáculo
-void MoveObstacles(Obstacle& obstacle1, Obstacle& obstacle2, Player player)
+void MoveObstacles(Player player)
 {
 	obstacle1.posX -= obstacle1.speed * GetFrameTime();
 	obstacle2.posX -= obstacle2.speed * GetFrameTime();
@@ -147,7 +172,7 @@ bool CheckPlayerObstacleCollision(Player& player, Obstacle& obstacle)
 			(player.posY <= obstacle.posY + obstacle.height));
 }
 
-void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu, Screen& scene)
+void ResetGame(Player& player, bool& returnToMenu, Screen& scene)
 {
 	if (CheckPlayerObstacleCollision(player, obstacle1) || player.fall ||
 		CheckPlayerObstacleCollision(player, obstacle2))
@@ -159,5 +184,14 @@ void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& r
 
 		returnToMenu = false;
 	}
+}
+
+void DeInitGame()
+{
+	DeInitObstacle(obstacle1);
+	DeInitObstacle(obstacle2);
+
+	DeInitPlayer(player1);
+	DeInitPlayer(player2);
 }
 }

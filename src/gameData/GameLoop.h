@@ -6,7 +6,7 @@
 namespace game
 {
 // inicializa todo
-void InitAll(Player& player, Obstacle& obstacle1, Obstacle& obstacle2);
+void InitGame();
 
 // contiene el loop del juego
 void GameLoop();
