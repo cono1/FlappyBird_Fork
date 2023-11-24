@@ -84,6 +84,7 @@ void GameLoop()
 			DrawObstacles(obstacle1, obstacle2);
 			GameDrawReturnButton(screen, returnToMenu);
 			DrawPlayer(player1);
+			DrawScore();
 			break;
 		case Screen::MULTIPLAYER:
 			DrawParallax();
@@ -91,6 +92,7 @@ void GameLoop()
 			GameDrawReturnButton(screen, returnToMenu);
 			DrawPlayer(player1);
 			DrawPlayer(player2);
+			DrawScore();
 			break;
 		case Screen::RULES:
 			GameDrawReturnButton(screen, returnToMenu);

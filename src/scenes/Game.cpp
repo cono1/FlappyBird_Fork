@@ -1,15 +1,21 @@
 #include "Game.h"
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 namespace game
 {
+static int score;
+static int maxScore = 10000;
+
 void MovePlayer(Player& player, KeyboardKey key);
 void CheckPlayerScreenLimits(Player& player);
 void MoveObstacles(Obstacle& obstacle1, Obstacle& obstacle2, Player player);
+void AddScore();
 bool CheckPlayerObstacleCollision(Player& player, Obstacle& obstacle);
+void ResetScore();
 void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu);
 
 void DrawObjectsHitboxes(Player player, Obstacle obstacle1, Obstacle obstacle2)
@@ -41,6 +47,15 @@ void DrawPlayer(Player player)
 	{
 		DrawTexture(player.playerDownTexture, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
 	}
+}
+
+void DrawScore()
+{
+	int scoreSize = 35;
+	int offset = 40;
+	std::string scoreText = "Score: " + std::to_string(score);
+
+	DrawText(scoreText.c_str(), GetScreenWidth() - MeasureText(scoreText.c_str(), scoreSize) - offset, 10, scoreSize, WHITE);
 }
 
 void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu)
@@ -129,6 +144,16 @@ void MoveObstacles(Obstacle& obstacle1, Obstacle& obstacle2, Player player)
 		{
 			obstacle2.posY = static_cast<float>(GetScreenHeight() - 10);
 		}
+
+		AddScore();
+	}
+}
+
+void AddScore()
+{
+	if (score + 10 < maxScore)
+	{
+		score += 10;
 	}
 }
 
@@ -141,6 +166,11 @@ bool CheckPlayerObstacleCollision(Player& player, Obstacle& obstacle)
 			(player.posY <= obstacle.posY + obstacle.height));
 }
 
+void ResetScore()
+{
+	score = 0;
+}
+
 void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu)
 {
 	if (CheckPlayerObstacleCollision(player, obstacle1) || player.fall ||
@@ -149,6 +179,7 @@ void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& r
 		ResetPlayer(player);
 		ResetObstacle(obstacle1, 0.0f, 300);
 		ResetObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());
+		ResetScore();
 
 		returnToMenu = false;
 	}
