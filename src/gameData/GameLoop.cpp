@@ -18,8 +18,8 @@ void InitAll(Player& player1, Player& player2, Obstacle& obstacle1, Obstacle& ob
 {
 	srand(static_cast<unsigned int>(time(NULL)));
 
-	const int screenWidth = 1080;
-	const int screenHeight = 720;
+	const int screenWidth = 1024;
+	const int screenHeight = 768;
 	Vector2 player1InitPos = { 50, screenHeight / 2 };
 	Vector2 player2InitPos = { player1InitPos.x + 80, player1InitPos.y };
 
@@ -111,6 +111,7 @@ void GameLoop()
 	DeInitObstacle(obstacle2);
 
 	DeInitPlayer(player1);
+	DeInitPlayer(player2);
 
 	CloseWindow();
 }
