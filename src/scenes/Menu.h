@@ -8,7 +8,8 @@ enum class Screen
 	SINGLEPLAYER,
 	MULTIPLAYER,
 	RULES,
-	CREDITS
+	CREDITS,
+	ENDSCREEN
 };
 
 // dibuja el menú

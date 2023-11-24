@@ -45,6 +45,12 @@
     <ClCompile Include="src\scenes\Rules.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenes\EndScreen.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\objects\Score.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\objects\Obstacle.h">
@@ -70,6 +76,12 @@
     </ClInclude>
     <ClInclude Include="src\scenes\Rules.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\EndScreen.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\Score.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

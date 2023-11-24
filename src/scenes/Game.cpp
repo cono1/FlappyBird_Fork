@@ -1,22 +1,19 @@
 #include "Game.h"
 
 #include <iostream>
-#include <string>
+
+#include "scenes/EndScreen.h"
+#include "objects/Score.h"
 
 using namespace std;
 
 namespace game
 {
-static int score;
-static int maxScore = 10000;
-
 void MovePlayer(Player& player, KeyboardKey key);
 void CheckPlayerScreenLimits(Player& player);
 void MoveObstacles(Obstacle& obstacle1, Obstacle& obstacle2, Player player);
-void AddScore();
 bool CheckPlayerObstacleCollision(Player& player, Obstacle& obstacle);
-void ResetScore();
-void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu);
+void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu, Screen& scene);
 
 void DrawObjectsHitboxes(Player player, Obstacle obstacle1, Obstacle obstacle2)
 {
@@ -49,16 +46,8 @@ void DrawPlayer(Player player)
 	}
 }
 
-void DrawScore()
-{
-	int scoreSize = 35;
-	int offset = 40;
-	std::string scoreText = "Score: " + std::to_string(score);
 
-	DrawText(scoreText.c_str(), GetScreenWidth() - MeasureText(scoreText.c_str(), scoreSize) - offset, 10, scoreSize, WHITE);
-}
-
-void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu)
+void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu, Screen& scene)
 {
 	MovePlayer(player, KEY_SPACE);
 
@@ -66,10 +55,10 @@ void Update(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& retu
 
 	MoveObstacles(obstacle1, obstacle2, player);
 
-	ResetGame(player, obstacle1, obstacle2, returnToMenu);
+	ResetGame(player, obstacle1, obstacle2, returnToMenu, scene);
 }
 
-void Update(Player& player1, Player& player2, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu)
+void Update(Player& player1, Player& player2, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu, Screen& scene)
 {
 	MovePlayer(player1, KEY_W);
 	MovePlayer(player2, KEY_SPACE);
@@ -79,8 +68,8 @@ void Update(Player& player1, Player& player2, Obstacle& obstacle1, Obstacle& obs
 
 	MoveObstacles(obstacle1, obstacle2, player1);
 
-	ResetGame(player1, obstacle1, obstacle2, returnToMenu);
-	ResetGame(player2, obstacle1, obstacle2, returnToMenu);
+	ResetGame(player1, obstacle1, obstacle2, returnToMenu, scene);
+	ResetGame(player2, obstacle1, obstacle2, returnToMenu, scene);
 }
 
 // mov del jugador
@@ -149,14 +138,6 @@ void MoveObstacles(Obstacle& obstacle1, Obstacle& obstacle2, Player player)
 	}
 }
 
-void AddScore()
-{
-	if (score + 10 < maxScore)
-	{
-		score += 10;
-	}
-}
-
 // colision del juagador con el obstáculo
 bool CheckPlayerObstacleCollision(Player& player, Obstacle& obstacle)
 {
@@ -166,20 +147,15 @@ bool CheckPlayerObstacleCollision(Player& player, Obstacle& obstacle)
 			(player.posY <= obstacle.posY + obstacle.height));
 }
 
-void ResetScore()
-{
-	score = 0;
-}
-
-void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu)
+void ResetGame(Player& player, Obstacle& obstacle1, Obstacle& obstacle2, bool& returnToMenu, Screen& scene)
 {
 	if (CheckPlayerObstacleCollision(player, obstacle1) || player.fall ||
-		CheckPlayerObstacleCollision(player, obstacle2) || returnToMenu)
+		CheckPlayerObstacleCollision(player, obstacle2))
 	{
+		scene = Screen::ENDSCREEN;
 		ResetPlayer(player);
 		ResetObstacle(obstacle1, 0.0f, 300);
 		ResetObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());
-		ResetScore();
 
 		returnToMenu = false;
 	}

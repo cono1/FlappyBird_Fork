@@ -8,12 +8,16 @@
 #include "scenes/Game.h"
 #include "scenes/Credits.h"
 #include "scenes/Rules.h"
+#include "scenes/EndScreen.h"
 #include "objects/Parallax.h"
+#include "objects/Score.h"
 
 using namespace std;
 
 namespace game
 {
+static Screen previousScreen;
+
 void InitAll(Player& player1, Player& player2, Obstacle& obstacle1, Obstacle& obstacle2)
 {
 	srand(static_cast<unsigned int>(time(NULL)));
@@ -56,15 +60,19 @@ void GameLoop()
 			break;
 		case Screen::SINGLEPLAYER:
 			UpdateParallax();
-			Update(player1, obstacle1, obstacle2, returnToMenu);
+			Update(player1, obstacle1, obstacle2, returnToMenu, screen);
+			previousScreen = Screen::SINGLEPLAYER;
 			break;
 		case Screen::MULTIPLAYER:
 			UpdateParallax();
-			Update(player1, player2, obstacle1, obstacle2, returnToMenu);
+			Update(player1, player2, obstacle1, obstacle2, returnToMenu, screen);
+			previousScreen = Screen::MULTIPLAYER;
 			break;
 		case Screen::RULES:
 			break;
 		case Screen::CREDITS:
+			break;
+		case Screen::ENDSCREEN:
 			break;
 		}
 
@@ -101,6 +109,9 @@ void GameLoop()
 		case Screen::CREDITS:
 			DrawCredits();
 			GameDrawReturnButton(screen, returnToMenu);
+			break;
+		case Screen::ENDSCREEN:
+			DrawEndScreen(screen, previousScreen);
 			break;
 		}
 
