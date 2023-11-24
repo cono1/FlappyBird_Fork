@@ -51,6 +51,9 @@
     <ClCompile Include="src\objects\Score.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenes\Pause.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\objects\Obstacle.h">
@@ -82,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="src\objects\Score.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\Pause.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

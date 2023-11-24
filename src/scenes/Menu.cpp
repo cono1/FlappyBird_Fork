@@ -95,7 +95,7 @@ void DrawMenu(Screen& screen)
 	DrawText("0.3", GetScreenWidth() - 60, GetScreenHeight() - 40, 40, WHITE);
 }
 
-void GameDrawReturnButton(Screen& screen, bool& returnToMenu)
+void DrawReturnButton(Screen& screen, bool& returnToMenu)
 {
 	int returnPosX = GetScreenWidth() - 150;
 	int returnPosY = GetScreenHeight() - 50;
@@ -111,6 +111,27 @@ void GameDrawReturnButton(Screen& screen, bool& returnToMenu)
 		{
 			screen = Screen::MENU;
 			returnToMenu = true;
+		}
+	}
+}
+
+void DrawPauseButton(Screen& screen)
+{
+	int pausePosX = GetScreenWidth() - 150;
+	int pausePosY = GetScreenHeight() - 50;
+
+	int pauseSize = 40;
+
+	DrawText("Pause", pausePosX, pausePosY, pauseSize, BLACK);
+
+	if (GetMousePosition().x >= pausePosX && GetMousePosition().x <= pausePosX + 140
+		&& GetMousePosition().y >= pausePosY && GetMousePosition().y <= pausePosY + 40)
+	{
+		DrawText("Pause", pausePosX, pausePosY, pauseSize, GRAY);
+
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		{
+			screen = Screen::PAUSE;
 		}
 	}
 }

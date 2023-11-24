@@ -9,6 +9,7 @@
 #include "scenes/Credits.h"
 #include "scenes/Rules.h"
 #include "scenes/EndScreen.h"
+#include "scenes/Pause.h"
 #include "objects/Parallax.h"
 #include "objects/Score.h"
 
@@ -72,6 +73,8 @@ void GameLoop()
 			break;
 		case Screen::CREDITS:
 			break;
+		case Screen::PAUSE:
+			break;
 		case Screen::ENDSCREEN:
 			break;
 		}
@@ -90,25 +93,28 @@ void GameLoop()
 			DrawObjectsHitboxes(player1, obstacle1, obstacle2);
 #endif
 			DrawObstacles(obstacle1, obstacle2);
-			GameDrawReturnButton(screen, returnToMenu);
+			DrawPauseButton(screen);
 			DrawPlayer(player1);
 			DrawScore();
 			break;
 		case Screen::MULTIPLAYER:
 			DrawParallax();
 			DrawObstacles(obstacle1, obstacle2);
-			GameDrawReturnButton(screen, returnToMenu);
+			DrawPauseButton(screen);
 			DrawPlayer(player1);
 			DrawPlayer(player2);
 			DrawScore();
 			break;
 		case Screen::RULES:
-			GameDrawReturnButton(screen, returnToMenu);
+			DrawReturnButton(screen, returnToMenu);
 			DrawRules();
 			break;
 		case Screen::CREDITS:
 			DrawCredits();
-			GameDrawReturnButton(screen, returnToMenu);
+			DrawReturnButton(screen, returnToMenu);
+			break;
+		case Screen::PAUSE:
+			DrawPauseScreen(screen, previousScreen);
 			break;
 		case Screen::ENDSCREEN:
 			DrawEndScreen(screen, previousScreen);

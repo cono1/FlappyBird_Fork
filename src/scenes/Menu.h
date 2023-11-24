@@ -9,6 +9,7 @@ enum class Screen
 	MULTIPLAYER,
 	RULES,
 	CREDITS,
+	PAUSE,
 	ENDSCREEN
 };
 
@@ -16,5 +17,7 @@ enum class Screen
 void DrawMenu(Screen& screen);
 
 // botón que vuelve al menú
-void GameDrawReturnButton(Screen& screen, bool& returnToMenu);
+void DrawReturnButton(Screen& screen, bool& returnToMenu);
+
+void DrawPauseButton(Screen& screen);
 }

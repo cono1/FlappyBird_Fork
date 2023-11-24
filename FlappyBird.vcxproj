@@ -167,6 +167,7 @@
     <ClCompile Include="src\scenes\EndScreen.cpp" />
     <ClCompile Include="src\scenes\Game.cpp" />
     <ClCompile Include="src\scenes\Menu.cpp" />
+    <ClCompile Include="src\scenes\Pause.cpp" />
     <ClCompile Include="src\scenes\Rules.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +180,7 @@
     <ClInclude Include="src\scenes\EndScreen.h" />
     <ClInclude Include="src\scenes\Game.h" />
     <ClInclude Include="src\scenes\Menu.h" />
+    <ClInclude Include="src\scenes\Pause.h" />
     <ClInclude Include="src\scenes\Rules.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
