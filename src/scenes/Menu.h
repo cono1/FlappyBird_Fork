@@ -10,7 +10,8 @@ enum class Screen
 	RULES,
 	CREDITS,
 	PAUSE,
-	ENDSCREEN
+	LOOSESCREEN,
+	WINSCREEN
 };
 
 // dibuja el menú

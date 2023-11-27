@@ -7,7 +7,7 @@
 namespace game
 {
 static int score = 0;
-static int maxScore = 1000;
+static int maxScore = 50;
 static int hiScore = score;
 
 void DrawScore()
@@ -23,7 +23,7 @@ void AddScore()
 {
 	int scoreAdd = 10;
 
-	if (score + scoreAdd < maxScore)score += scoreAdd;
+	if (score + scoreAdd <= maxScore)score += scoreAdd;
 
 
 	if (hiScore < score) hiScore = score;
@@ -37,6 +37,11 @@ int GetScore()
 int GetHiScore()
 {
 	return hiScore;
+}
+
+int GetMaxScore()
+{
+	return maxScore;
 }
 
 void ResetScore()

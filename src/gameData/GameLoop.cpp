@@ -8,8 +8,10 @@
 #include "scenes/Game.h"
 #include "scenes/Credits.h"
 #include "scenes/Rules.h"
-#include "scenes/EndScreen.h"
+#include "scenes/LooseScreen.h"
+#include "scenes/WinScreen.h"
 #include "scenes/Pause.h"
+
 #include "objects/Parallax.h"
 #include "objects/Score.h"
 
@@ -71,7 +73,9 @@ void GameLoop()
 			break;
 		case Screen::PAUSE:
 			break;
-		case Screen::ENDSCREEN:
+		case Screen::LOOSESCREEN:
+			break;
+		case Screen::WINSCREEN:
 			break;
 		}
 
@@ -113,8 +117,11 @@ void GameLoop()
 		case Screen::PAUSE:
 			DrawPauseScreen(screen, previousScreen, returnToMenu);
 			break;
-		case Screen::ENDSCREEN:
-			DrawEndScreen(screen, previousScreen);
+		case Screen::LOOSESCREEN:
+			DrawLooseScreen(screen, previousScreen);
+			break;
+		case Screen::WINSCREEN:
+			DrawWinScreen(screen, previousScreen);
 			break;
 		}
 

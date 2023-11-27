@@ -1,4 +1,4 @@
-#include "EndScreen.h"
+#include "LooseScreen.h"
 
 #include <string>
 
@@ -9,7 +9,7 @@
 
 namespace game
 {
-void DrawEndScreen(Screen& screen, Screen previousScreen)
+void DrawLooseScreen(Screen& screen, Screen previousScreen)
 {
 	int scoreSize = 40;
 	int playAgainSize = 65;
@@ -39,11 +39,11 @@ void DrawEndScreen(Screen& screen, Screen previousScreen)
 
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
+			ResetScore();
+
 			if(previousScreen == Screen::SINGLEPLAYER) screen = Screen::SINGLEPLAYER;
 			
 			if(previousScreen == Screen::MULTIPLAYER) screen = Screen::MULTIPLAYER;
-
-			ResetScore();
 		}
 	}
 
@@ -62,8 +62,8 @@ void DrawEndScreen(Screen& screen, Screen previousScreen)
 
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
-			screen = Screen::MENU;
 			ResetScore();
+			screen = Screen::MENU;
 		}
 	}
 }

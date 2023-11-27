@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "scenes/EndScreen.h"
+#include "scenes/LooseScreen.h"
 #include "objects/Score.h"
 
 using namespace std;
@@ -177,11 +177,10 @@ void ResetGame(Player& player, bool& returnToMenu, Screen& scene)
 	if (CheckPlayerObstacleCollision(player, obstacle1) || player.fall ||
 		CheckPlayerObstacleCollision(player, obstacle2))
 	{
-		scene = Screen::ENDSCREEN;
+		scene = Screen::LOOSESCREEN;
 		ResetPlayer(player);
 		ResetObstacle(obstacle1, 0.0f, 300);
 		ResetObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());		
-		ResetScore();
 	}
 
 	if (returnToMenu)
@@ -189,8 +188,12 @@ void ResetGame(Player& player, bool& returnToMenu, Screen& scene)
 		ResetPlayer(player);
 		ResetObstacle(obstacle1, 0.0f, 300);
 		ResetObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());
-		ResetScore();
 		returnToMenu = false;
+	}
+
+	if (GetScore() >= GetMaxScore())
+	{
+		scene = Screen::WINSCREEN;
 	}
 }
 

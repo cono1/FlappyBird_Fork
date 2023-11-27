@@ -4,6 +4,8 @@
 
 #include "raylib.h"
 
+#include "objects/Score.h"
+
 namespace game
 {
 void DrawPauseScreen(Screen& screen, Screen previousScreen, bool& returnToMenu)
@@ -48,6 +50,7 @@ void DrawPauseScreen(Screen& screen, Screen previousScreen, bool& returnToMenu)
 
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
+			ResetScore();
 			screen = Screen::MENU;
 			returnToMenu = true;
 		}

@@ -45,13 +45,16 @@
     <ClCompile Include="src\scenes\Rules.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="src\scenes\EndScreen.cpp">
+    <ClCompile Include="src\scenes\LooseScreen.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="src\objects\Score.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="src\scenes\Pause.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\WinScreen.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,13 +83,16 @@
     <ClInclude Include="src\scenes\Rules.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="src\scenes\EndScreen.h">
+    <ClInclude Include="src\scenes\LooseScreen.h">
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="src\objects\Score.h">
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="src\scenes\Pause.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\WinScreen.h">
       <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
