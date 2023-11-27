@@ -180,8 +180,16 @@ void ResetGame(Player& player, bool& returnToMenu, Screen& scene)
 		scene = Screen::ENDSCREEN;
 		ResetPlayer(player);
 		ResetObstacle(obstacle1, 0.0f, 300);
-		ResetObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());
+		ResetObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());		
+		ResetScore();
+	}
 
+	if (returnToMenu)
+	{
+		ResetPlayer(player);
+		ResetObstacle(obstacle1, 0.0f, 300);
+		ResetObstacle(obstacle2, static_cast<float>(GetScreenHeight() / 2 + player.height), GetScreenHeight());
+		ResetScore();
 		returnToMenu = false;
 	}
 }

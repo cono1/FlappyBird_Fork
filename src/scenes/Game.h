@@ -11,7 +11,7 @@ namespace game
 void InitGameObjects();
 
 // dibuja el player y lso obstáculos
-void DrawObjectsHitboxes(Player player, Obstacle obstacle1, Obstacle obstacle2);
+void DrawObjectsHitboxes();
 void DrawObstacles();
 void DrawPlayer(bool isSinglePlayer);
 

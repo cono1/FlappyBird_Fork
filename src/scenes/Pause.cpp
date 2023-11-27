@@ -6,7 +6,7 @@
 
 namespace game
 {
-void DrawPauseScreen(Screen& screen, Screen previousScreen)
+void DrawPauseScreen(Screen& screen, Screen previousScreen, bool& returnToMenu)
 {
 	int optionsSize = 40;
 	int pauseSize = 65;
@@ -49,7 +49,7 @@ void DrawPauseScreen(Screen& screen, Screen previousScreen)
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 			screen = Screen::MENU;
-			
+			returnToMenu = true;
 		}
 	}
 }

@@ -4,5 +4,5 @@
 
 namespace game
 {
-void DrawPauseScreen(Screen& screen, Screen previousScreen);
+void DrawPauseScreen(Screen& screen, Screen previousScreen, bool& returnToMenu);
 }

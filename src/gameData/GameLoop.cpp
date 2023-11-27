@@ -88,7 +88,7 @@ void GameLoop()
 		case Screen::SINGLEPLAYER:
 			DrawParallax();
 #ifdef _DEBUG
-			DrawObjectsHitboxes(player1, obstacle1, obstacle2);
+			DrawObjectsHitboxes();
 #endif
 			DrawObstacles();
 			DrawPauseButton(screen);
@@ -111,7 +111,7 @@ void GameLoop()
 			DrawReturnButton(screen, returnToMenu);
 			break;
 		case Screen::PAUSE:
-			DrawPauseScreen(screen, previousScreen);
+			DrawPauseScreen(screen, previousScreen, returnToMenu);
 			break;
 		case Screen::ENDSCREEN:
 			DrawEndScreen(screen, previousScreen);
